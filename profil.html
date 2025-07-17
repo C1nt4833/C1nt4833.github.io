@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Tim & Terapis - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" href="src/gerbangkata.png" type="image/png" />
+  <style>
+    @media (max-width: 899px) {
+      main {
+        padding: 0 4vw;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation Baru -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="profil.html" class="active">Terapis</a>
+      <a href="forum.html">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="deteksi-speech.html">Deteksi</a>
+      <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+    </nav>
+  </div>
+
+  <div class="site-header-hero-wrapper">
+    <header class="main-header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo-link">
+          <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+          <span class="header-logo-text">Gerbang Kata</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="profil.html" class="active">Terapis</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="map.html">Peta</a></li>
+            <li><a href="deteksi-speech.html">Deteksi</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+          <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+        </div>
+        <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+          <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+          <span class="icon-close" style="display:none">&times;</span>
+        </button>
+      </div>
+    </header>
+  </div>
+  <!-- End Header & Navigation Baru -->
+
+  <main>
+    <section class="therapists-section" tabindex="0" aria-label="Profil Tim dan Terapis Wicara">
+      <h2 class="section-title">Profil Tim & Terapis Wicara Kami</h2>
+      <div class="therapist-list">
+        <article class="therapist-card card-3d" tabindex="0">
+          <div class="therapist-photo">
+            <img src="src/dr.andi.png" alt="Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog" />
+          </div>
+          <div class="therapist-info">
+            <h3>Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog</h3>
+            <p class="specialization">Psikologi Klinis</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> Kendari</p>
+            <p class="experience"><i class="fas fa-certificate"></i> 12 tahun pengalaman</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <span>4.7 (45 ulasan)</span>
+            </div>
+            <button class="detail-button" aria-label="Lihat profil Dr. Ani" onclick="location.href='profil-detail.html?id=1'">Lihat Profil</button>
+          </div>
+        </article>
+
+        <article class="therapist-card card-3d" tabindex="0">
+          <div class="therapist-photo">
+            <img src="src/karakter1.png" alt="Dr. Budi Santoso" />
+          </div>
+          <div class="therapist-info">
+            <h3>Sri Nurul Ain S.Pd</h3>
+            <p class="specialization">Terapis Wicara Anak</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i>Kendari</p>
+            <p class="experience"><i class="fas fa-certificate"></i> 9 tahun pengalaman</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i>
+              <span>4.1 (20 ulasan)</span>
+            </div>
+            <button class="detail-button" aria-label="Lihat profil Dr. Budi Santoso" onclick="location.href='profil-detail.html?id=2'">Lihat Profil</button>
+          </div>
+        </article>
+
+        <article class="therapist-card card-3d" tabindex="0">
+          <div class="therapist-photo">
+            <img src="src/karakter1.png" alt="Dr. Sari Wulandari" />
+          </div>
+          <div class="therapist-info">
+            <h3>Karmila  Amd.stat</h3>
+            <p class="specialization">Terapis Wicara Anak</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i>Kendari</p>
+            <p class="experience"><i class="fas fa-certificate"></i> 7 tahun pengalaman</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <span>4.1 (60 ulasan)</span>
+            </div>
+            <button class="detail-button" aria-label="Lihat profil Dr. Sari Wulandari" onclick="location.href='profil-detail.html?id=3'">Lihat Profil</button>
+          </div>
+        </article>
+
+        <article class="therapist-card card-3d" tabindex="0">
+          <div class="therapist-photo">
+            <img src="src/karakter1.png" alt="Dr. Rahmat Hidayat" />
+          </div>
+          <div class="therapist-info">
+            <h3>Inayahtullah Afandi S.SI .gr</h3>
+            <p class="specialization">Terapis Wicara Anak</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> Kendari</p>
+            <p class="experience"><i class="fas fa-certificate"></i> 15 tahun pengalaman</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              <span>4.6 (50 ulasan)</span>
+            </div>
+            <button class="detail-button" aria-label="Lihat profil Dr. Rahmat Hidayat" onclick="location.href='profil-detail.html?id=4'">Lihat Profil</button>
+          </div>
+        </article>
+
+        <article class="therapist-card card-3d" tabindex="0">
+          <div class="therapist-photo">
+            <img src="src/karakter1.png" alt="Dr. Lina Marlina" />
+          </div>
+          <div class="therapist-info">
+            <h3>Wa ode nur amalia S.Pt.</h3>
+            <p class="specialization">Terapis Wicara Anak</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> Kendari</p>
+            <p class="experience"><i class="fas fa-certificate"></i> 8 tahun pengalaman</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i>
+              <span>3.9 (22 ulasan)</span>
+            </div>
+            <button class="detail-button" aria-label="Lihat profil Dr. Lina Marlina">Lihat Profil</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-3d" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Tentang Gerbang Kata</h3>
+        <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Kontak</h3>
+        <p><i class="fas fa-envelope"></i> infogerbangkata@gmail.com</p>
+        <p><i class="fas fa-phone"></i> 085215224661 </br>(Cinta Wardana)</p>
+        <p><i class="fas fa-phone"></i> 087766760195 </br>(Rezky Alya Pasrun)</p>
+        <p><i class="fas fa-phone"></i> 082328238104 </br>(Miqdad Asyraf Rizqullah)</p>
+      </div>
+      <div class="footer-section">
+        <h3>Tautan Cepat</h3>
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="profil.html">Terapis</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="deteksi-speech.html">Deteksi</a></li>
+            <li><a href="permainan.html">Game</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Gerbang Kata. Semua hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+        mobileNavOverlay.classList.toggle('is-open');
+        if (mobileNavOverlay.classList.contains('is-open')) {
+            document.body.classList.add('menu-open');
+            iconHamburger.style.display = 'none';
+            iconClose.style.display = 'inline';
+        } else {
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // Juga tutup menu jika klik di overlay luar menu
+    mobileNavOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileNavOverlay) {
+            mobileNavOverlay.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Interaktif - Gerbang Kata</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="src/gb.jpeg" type="image/png" />
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        .map-container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .map-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .map-header p {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .map-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .search-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-box button:hover {
+            background: var(--accent-color);
+        }
+        
+        .route-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .route-btn {
+            padding: 12px 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .route-btn:hover {
+            background: #ff8a65;
+            transform: translateY(-2px);
+        }
+        
+        .route-btn.active {
+            background: var(--accent-color);
+        }
+        
+        .map-wrapper {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        
+        .map-info {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .map-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .info-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .location-list {
+            margin-top: 20px;
+        }
+        
+        .location-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .location-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .location-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .location-info p {
+            color: var(--dark-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .location-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .action-btn.route {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .action-btn.info {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .map-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .search-container {
+                min-width: 100%;
+            }
+            
+            .route-controls {
+                justify-content: center;
+            }
+            
+            #map {
+                height: 400px;
+            }
+            
+            .map-header h1 {
+                font-size: 2rem;
+            }
+            
+            .location-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .location-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+    
+    <script>
+        // Cek login status, jika belum login redirect ke login2.html
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login2.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="mobile-nav-overlay">
+        <nav class="mobile-nav">
+            <a href="index.html">Beranda</a>
+            <a href="artikel.html">Artikel</a>
+            <a href="profil.html">Terapis</a>
+            <a href="forum.html">Forum</a>
+            <a href="map.html" class="active">Peta</a>
+            <a href="deteksi-speech.html">Deteksi</a>
+            <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo-link">
+                <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+                <span class="header-logo-text">Gerbang Kata</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="artikel.html">Artikel</a></li>
+                    <li><a href="profil.html">Terapis</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="map.html" class="active">Peta</a></li>
+                    <li><a href="deteksi-speech.html">Deteksi</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+                <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+                <audio id="heroMusic" src="src/galau.mp3"></audio>
+            </div>
+            <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+                <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+                <span class="icon-close" style="display:none">&times;</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="site-header-hero-wrapper">
+        <main>
+            <div class="map-container">
+                <div class="map-header">
+                    <h1>Peta Interaktif</h1>
+                    <p>Temukan lokasi terapis, klinik, dan fasilitas kesehatan terdekat di Sulawesi Tenggara dan seluruh Indonesia</p>
+                </div>
+
+                <div class="map-controls">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Cari lokasi terapis, klinik, atau alamat...">
+                            <button onclick="searchLocation()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="route-controls">
+                        <button class="route-btn" onclick="getCurrentLocation()">
+                            <i class="fas fa-location-arrow"></i> Lokasi Saya
+                        </button>
+                        <button class="route-btn" onclick="toggleRouteMode()">
+                            <i class="fas fa-route"></i> Mode Rute
+                        </button>
+                        <button class="route-btn" onclick="clearRoute()">
+                            <i class="fas fa-times"></i> Hapus Rute
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="filter-controls">
+                    <h4>Filter Lokasi:</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all" onclick="filterLocations('all')">
+                            <i class="fas fa-map-marker-alt"></i> Semua
+                        </button>
+                        <button class="filter-btn" data-filter="klinik" onclick="filterLocations('klinik')">
+                            <i class="fas fa-user-md"></i> Klinik
+                        </button>
+                        <button class="filter-btn" data-filter="rumah_sakit" onclick="filterLocations('rumah_sakit')">
+                            <i class="fas fa-hospital"></i> Rumah Sakit
+                        </button>
+                        <button class="filter-btn" data-filter="pusat_terapi" onclick="filterLocations('pusat_terapi')">
+                            <i class="fas fa-stethoscope"></i> Pusat Terapi
+                        </button>
+                        <button class="filter-btn" data-filter="tempat_umum" onclick="filterLocations('tempat_umum')">
+                            <i class="fas fa-store"></i> Tempat Umum
+                        </button>
+                        <button class="filter-btn" data-filter="bandara" onclick="filterLocations('bandara')">
+                            <i class="fas fa-plane"></i> Bandara
+                        </button>
+                        <button class="filter-btn" data-filter="kampus" onclick="filterLocations('kampus')">
+                            <i class="fas fa-university"></i> Kampus
+                        </button>
+                        <button class="filter-btn" data-filter="pelabuhan" onclick="filterLocations('pelabuhan')">
+                            <i class="fas fa-ship"></i> Pelabuhan
+                        </button>
+                    </div>
+                </div>
+
+                <div class="map-wrapper">
+                    <div id="map"></div>
+                </div>
+
+                <div class="map-info">
+                    <h3>Lokasi Terapis & Klinik Terdekat</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-user-md"></i>
+                            <div>
+                                <strong>Terapis Speech</strong>
+                                <p>Spesialis keterlambatan bicara</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-hospital"></i>
+                            <div>
+                                <strong>Klinik Terapi</strong>
+                                <p>Fasilitas terapi lengkap</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-stethoscope"></i>
+                            <div>
+                                <strong>Dokter Anak</strong>
+                                <p>Spesialis tumbuh kembang</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <strong>Pusat Pendidikan</strong>
+                                <p>Program intervensi dini</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="location-list">
+                        <h4>Lokasi Populer di Sulawesi Tenggara</h4>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Bicara Anak Kendari</h4>
+                                <p>Jl. Soekarno-Hatta No. 45, Kendari, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-3.9754, 122.5157, 'Klinik Terapi Bicara Anak Kendari')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Bicara Anak Kendari', 'Spesialis terapi speech delay untuk anak usia 2-12 tahun', 'Jl. Soekarno-Hatta No. 45, Kendari, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Rumah Sakit Umum Daerah Kendari</h4>
+                                <p>Jl. Dr. Ratulangi No. 123, Kendari, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-3.9754, 122.5157, 'Rumah Sakit Umum Daerah Kendari')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Rumah Sakit Umum Daerah Kendari', 'Rumah sakit umum dengan poli anak dan tumbuh kembang', 'Jl. Dr. Ratulangi No. 123, Kendari, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Pusat Terapi Anak Cerdas Kendari</h4>
+                                <p>Jl. Ahmad Yani No. 78, Kendari, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-3.9754, 122.5157, 'Pusat Terapi Anak Cerdas Kendari')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Pusat Terapi Anak Cerdas Kendari', 'Pusat terapi holistik untuk anak dengan kebutuhan khusus', 'Jl. Ahmad Yani No. 78, Kendari, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Wicara Baubau</h4>
+                                <p>Jl. Ahmad Yani No. 34, Baubau, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-5.4667, 122.6333, 'Klinik Terapi Wicara Baubau')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Wicara Baubau', 'Klinik terapi wicara dan tumbuh kembang', 'Jl. Ahmad Yani No. 34, Baubau, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Pusat Terapi Anak Kolaka</h4>
+                                <p>Jl. Soekarno-Hatta No. 67, Kolaka, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-4.0167, 121.6167, 'Pusat Terapi Anak Kolaka')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Pusat Terapi Anak Kolaka', 'Pusat terapi untuk anak berkebutuhan khusus', 'Jl. Soekarno-Hatta No. 67, Kolaka, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Wicara Muna</h4>
+                                <p>Jl. Ahmad Yani No. 23, Raha, Muna, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-4.8500, 122.7000, 'Klinik Terapi Wicara Muna')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Wicara Muna', 'Klinik terapi wicara dan tumbuh kembang anak', 'Jl. Ahmad Yani No. 23, Raha, Muna, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Pusat Terapi Anak Wakatobi</h4>
+                                <p>Jl. Ahmad Yani No. 12, Wangi-Wangi, Wakatobi, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-5.3167, 123.5833, 'Pusat Terapi Anak Wakatobi')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Pusat Terapi Anak Wakatobi', 'Pusat terapi untuk anak berkebutuhan khusus', 'Jl. Ahmad Yani No. 12, Wangi-Wangi, Wakatobi, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Bicara Konawe</h4>
+                                <p>Jl. Ahmad Yani No. 89, Unaaha, Konawe, Sulawesi Tenggara</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-3.9754, 122.5157, 'Klinik Terapi Bicara Konawe')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Bicara Konawe', 'Klinik terapi bicara dan tumbuh kembang anak', 'Jl. Ahmad Yani No. 89, Unaaha, Konawe, Sulawesi Tenggara')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="location-list">
+                        <h4>Lokasi di Daerah Lain</h4>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Bicara Anak Jakarta</h4>
+                                <p>Jl. Sudirman No. 123, Jakarta Pusat</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-6.2088, 106.8456, 'Klinik Terapi Bicara Anak Jakarta')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Bicara Anak Jakarta', 'Spesialis terapi speech delay untuk anak usia 2-12 tahun', 'Jl. Sudirman No. 123, Jakarta Pusat')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-info">
+                                <h4>Klinik Terapi Wicara Banjarmasin</h4>
+                                <p>Jl. Lambung Mangkurat No. 89, Banjarmasin, Kalimantan Selatan</p>
+                            </div>
+                            <div class="location-actions">
+                                <button class="action-btn route" onclick="showRoute(-3.3167, 114.5833, 'Klinik Terapi Wicara Banjarmasin')">
+                                    <i class="fas fa-route"></i> Rute
+                                </button>
+                                <button class="action-btn info" onclick="showInfo('Klinik Terapi Wicara Banjarmasin', 'Klinik terapi wicara dan tumbuh kembang anak', 'Jl. Lambung Mangkurat No. 89, Banjarmasin, Kalimantan Selatan')">
+                                    <i class="fas fa-info"></i> Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="map.js"></script>
+</body>
+</html> 

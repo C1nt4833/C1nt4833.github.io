@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permainan Stimulasi - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/permainan.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="src/gerbangkata.png" type="image/png">
+  <style>
+    body {
+      background: url('src/memahami speech delay pada anak.webp') no-repeat center center;
+      background-size: 100% 100%;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="profil.html">Terapis</a>
+      <a href="forum.html">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="deteksi-speech.html">Deteksi</a>
+      <a href="permainan.html" class="cta-button-nav active">Mainkan!</a>
+    </nav>
+  </div>
+
+  <div class="site-header-hero-wrapper">
+    <header class="main-header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo-link">
+          <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+          <span class="header-logo-text">Gerbang Kata</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="profil.html">Terapis</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="map.html">Peta</a></li>
+            <li><a href="deteksi-speech.html">Deteksi</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="permainan.html" class="cta-button-nav active">Mainkan!</a>
+          <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+        </div>
+        <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+          <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+          <span class="icon-close" style="display:none">&times;</span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Main Game Content -->
+  
+  <main class="game-main">
+    <section class="game-intro">
+      <h2 class="section-title">Permainan Stimulasi</h2>
+      <p class="section-subtitle">Pilih permainan untuk melatih kemampuan bicara anak:</p>
+    </section>
+
+    <div class="game-container">
+      <!-- Game 1 - Sudah bisa dimainkan -->
+      <div class="game-card card-3d" id="soundGameCard">
+        <div class="game-icon">
+          <i class="fas fa-microphone-alt"></i>
+        </div>
+        <h3>Tirukan Suara</h3>
+        <p>Latihan mengenal nama-nama hewan dan tirukan suara nya</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.open('https://wordwall.net/resource/78705191/menirukan-gerak-dan-suara-hewan')">Mulai Bermain</button>
+      </div>
+
+      <!-- Game 2 - Sudah bisa dimainkan -->
+      <div class="game-card card-3d" id="imageGameCard">
+        <div class="game-icon">
+          <i class="fas fa-images"></i>
+        </div>
+        <h3>Kenali Gambar</h3>
+        <p>Tebak nama benda dari gambar yang ditampilkan</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.open('https://wordwall.net/resource/53798107/membaca/cari-nama-benda')">Mulai Bermain</button>
+      </div>
+
+      <!-- Game 3 - Sudah bisa dimainkan -->
+      <div class="game-card card-3d" id="wordGameCard">
+        <div class="game-icon">
+          <i class="fas fa-puzzle-piece"></i>
+        </div>
+        <h3>Susun Kata</h3>
+        <p>Susun huruf-huruf menjadi kata yang benar</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.open('https://wordwall.net/resource/72281316/indonesian/menyusun-kata')">Mulai Bermain</button>
+      </div>
+
+      <!-- Game 4 - Sudah bisa dimainkan -->
+      <div class="game-card card-3d" id="memoryGameCard">
+        <div class="game-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3>Memory Kata</h3>
+        <p>Temukan pasangan gambar dan kata yang cocok</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.open('https://wordwall.net/resource/13469912/kata-dan-benda')">Mulai Bermain</button>
+      </div>
+
+      <!-- Game 5 - Tower Blocks -->
+      <div class="game-card card-3d" id="towerBlocksGameCard">
+        <div class="game-icon">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <h3>Tower Blocks</h3>
+        <p>Permainan menyusun balok setinggi mungkin. Latih konsentrasi dan koordinasi!</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.location.href='tower.html'">Mulai Bermain</button>
+      </div>
+
+      <!-- Game 6 - Crossy Road (Ayam) -->
+      <div class="game-card card-3d" id="crossyRoadGameCard">
+        <div class="game-icon">
+          <i class="fas fa-road"></i>
+        </div>
+        <h3>Crossy Road</h3>
+        <p>Bantu ayam menyeberang jalan! Latih refleks dan koordinasi gerak.</p>
+        <div class="game-progress">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        <button class="game-btn" onclick="window.location.href='ayam.html'">Mulai Bermain</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Game Screens -->
+  <!-- Game Screen Tirukan Suara (Versi Canggih) -->
+<div class="game-screen" id="soundGameScreen">
+    <div class="game-header">
+      <button class="back-btn" onclick="exitGame()"><i class="fas fa-arrow-left"></i> Kembali</button>
+      <h2>Tirukan Suara</h2>
+      <div class="game-score">Poin: <span id="soundScore">0</span></div>
+    </div>
+    
+    <div class="game-content">
+      <div class="animal-card">
+        <img id="animalImage" src="" alt="Gambar Hewan" class="animal-img">
+        <h3 id="animalName">-</h3>
+        <div class="sound-controls">
+          <button class="sound-btn" id="playSoundBtn"><i class="fas fa-volume-up"></i> Dengarkan</button>
+          <button class="sound-btn mic-btn" id="micBtn"><i class="fas fa-microphone"></i> Tirukan</button>
+        </div>
+        <audio id="animalSound"></audio>
+      </div>
+      
+      <div class="result-container">
+        <div class="result-feedback" id="resultFeedback">
+          <p id="resultText">Tekan tombol "Tirukan" lalu ucapkan suara yang Anda dengar</p>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="accuracyBar"></div>
+          <span id="accuracyText">0% Kemiripan</span>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button class="action-btn next-btn" id="nextBtn" disabled>Lanjutkan <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/permainan.js"></script>
+  <script src="js/speech-recognition.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+        mobileNavOverlay.classList.toggle('is-open');
+        if (mobileNavOverlay.classList.contains('is-open')) {
+            document.body.classList.add('menu-open');
+            iconHamburger.style.display = 'none';
+            iconClose.style.display = 'inline';
+        } else {
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // Juga tutup menu jika klik di overlay luar menu
+    mobileNavOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileNavOverlay) {
+            mobileNavOverlay.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+</body>
+</html>

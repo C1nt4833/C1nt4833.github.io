@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artikel Edukasi - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" href="assets/img/gerbangkata.png" type="image/png" />
+  <style>
+    body.articles-page.forum-page {
+      background: url('src/bgkategori.webp') no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    .forum-center-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 60vh;
+      width: 100%;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .forum-title-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 22px;
+      box-shadow: 0 4px 18px 0 rgba(80,120,200,0.10);
+      padding: 1.2rem 2.5rem;
+      margin-bottom: 2.2rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #3556a9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    .forum-form-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 18px 0 rgba(80,120,200,0.13);
+      padding: 2.2rem 2rem 1.5rem 2rem;
+      max-width: 500px;
+      width: 100%;
+      margin: 0 auto 2.5rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      align-items: center;
+    }
+    .forum-form-card input,
+    .forum-form-card textarea {
+      border: 2px solid #b5c6e0;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
+      outline: none;
+      transition: border 0.2s;
+      width: 100%;
+      background: #f8fbff;
+      display: block;
+    }
+    .forum-form-card input:focus,
+    .forum-form-card textarea:focus {
+      border: 2px solid #3556a9;
+    }
+    .forum-form-card button {
+      background: #3556a9;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 0;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px #2196f344;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      width: 100%;
+      display: block;
+    }
+    .forum-form-card button:hover {
+      background: #223a6d;
+      box-shadow: 0 4px 16px #1976d244;
+    }
+    @media (max-width: 600px) {
+      .forum-center-wrapper {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        box-sizing: border-box;
+      }
+      .forum-title-card {
+        font-size: 1.2rem;
+        padding: 0.7rem 1rem;
+      }
+      .forum-form-card {
+        padding: 1rem 0.8rem;
+        gap: 0.5rem;
+      }
+      .forum-form-card input,
+      .forum-form-card textarea {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .forum-form-card button {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+      }
+      .topic-card {
+        padding: 1rem 0.8rem;
+      }
+      .comments-section {
+        padding: 0.7rem;
+        margin-top: 1rem;
+      }
+      .comment-form {
+        gap: 0.4rem;
+      }
+      .comment-form input, .comment-form textarea {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
+      }
+      .comment-form button {
+        padding: 0.4rem 0;
+        font-size: 0.85rem;
+      }
+    }
+    .topic-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 18px 0 rgba(80,120,200,0.13);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto 2.5rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .topic-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #3556a9;
+      margin-bottom: 0.2rem;
+    }
+    .topic-meta {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 0.7rem;
+    }
+    .comments-section {
+      margin-top: 1.2rem;
+      background: #f8fbff;
+      border-radius: 14px;
+      padding: 1rem 1rem 0.5rem 1rem;
+      box-shadow: 0 2px 8px 0 rgba(80,120,200,0.07);
+    }
+    .comment-list {
+      margin-bottom: 1rem;
+    }
+    .comment-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px 0 rgba(80,120,200,0.07);
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.01rem;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .comment-card strong {
+      color: #3556a9;
+      font-weight: 700;
+    }
+    .comment-card small {
+      color: #888;
+      font-size: 0.85rem;
+      margin-left: 0.5rem;
+    }
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .comment-form input, .comment-form textarea {
+      border: 2px solid #b5c6e0;
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      font-size: 1rem;
+      background: #fff;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .comment-form input:focus, .comment-form textarea:focus {
+      border: 2px solid #3556a9;
+    }
+    .comment-form button {
+      background: #3556a9;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 0;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px #2196f344;
+      cursor: pointer;
+      margin-top: 0.2rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .comment-form button:hover {
+      background: #223a6d;
+      box-shadow: 0 4px 16px #1976d244;
+    }
+  </style>
+</head>
+<body class="articles-page forum-page">
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="profil.html">Terapis</a>
+      <a href="forum.html" class="active">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="deteksi-speech.html">Deteksi</a>
+      <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+    </nav>
+  </div>
+
+  <!-- Header & Navigation Baru -->
+  <div class="site-header-hero-wrapper">
+    <header class="main-header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo-link">
+          <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+          <span class="header-logo-text">Gerbang Kata</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="profil.html">Terapis</a></li>
+            <li><a href="forum.html" class="active">Forum</a></li>
+            <li><a href="map.html">Peta</a></li>
+            <li><a href="deteksi-speech.html">Deteksi</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+          <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+        </div>
+        <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+          <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+          <span class="icon-close" style="display:none">&times;</span>
+        </button>
+      </div>
+    </header>
+  </div>
+  <!-- End Header & Navigation Baru -->
+
+  <!-- Main Content -->
+  <main>
+    <div class="forum-center-wrapper">
+      <div class="forum-title-card">Forum Diskusi Orang Tua</div>
+      <form id="newTopicForm" class="forum-form-card">
+        <input type="text" id="authorName" placeholder="Nama Anda" required>
+        <input type="text" id="topicTitle" placeholder="Judul topik" required>
+        <textarea id="topicContent" placeholder="Isi topik" required></textarea>
+        <button type="submit">Kirim Topik</button>
+      </form>
+    </div>
+    
+    <section class="topic-list" aria-live="polite" aria-label="Daftar Topik Diskusi" id="topicList">
+      <!-- Topik diskusi akan muncul di sini -->
+    </section>
+  </main>
+
+  <script>
+    // Helper: ambil elemen
+    const topicListEl = document.getElementById('topicList');
+    const form = document.getElementById('newTopicForm');
+    const topicTitleInput = document.getElementById('topicTitle');
+    const topicContentInput = document.getElementById('topicContent');
+
+    // Load data topik dari localStorage
+    function loadTopics() {
+      const topics = JSON.parse(localStorage.getItem('gerbangkata_forum_topics') || '[]');
+      return topics;
+    }
+
+    // Simpan data topik ke localStorage
+    function saveTopics(topics) {
+      localStorage.setItem('gerbangkata_forum_topics', JSON.stringify(topics));
+    }
+
+    // Render daftar komentar
+    function renderComments(container, topic, allTopics) {
+      container.innerHTML = '';
+      if (!topic.comments || topic.comments.length === 0) {
+        container.innerHTML = '<p style="font-size: 0.9rem; color: #555;">Belum ada komentar.</p>';
+        return;
+      }
+
+      topic.comments.forEach((comment, index) => {
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment';
+        
+        const commentText = typeof comment === 'string' ? comment : comment.text;
+        const commentAuthor = typeof comment === 'string' ? 'Anonim' : (comment.author || 'Anonim');
+
+        commentEl.innerHTML = `<p><strong>${commentAuthor}:</strong> ${commentText}</p>`;
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-comment-btn';
+        deleteBtn.innerHTML = '&times;';
+        deleteBtn.setAttribute('aria-label', 'Hapus komentar');
+        deleteBtn.onclick = (e) => {
+          e.stopPropagation();
+          if (confirm('Anda yakin ingin menghapus komentar ini?')) {
+            topic.comments.splice(index, 1);
+            saveTopics(allTopics);
+            renderComments(container, topic, allTopics);
+          }
+        };
+
+        commentEl.appendChild(deleteBtn);
+        container.appendChild(commentEl);
+      });
+    }
+
+    // Render daftar topik
+    function renderTopics() {
+      const topics = loadTopics();
+      if (topics.length === 0) {
+        topicListEl.innerHTML = '';
+        return;
+      }
+      topicListEl.innerHTML = '';
+      topics.forEach((topic, index) => {
+        const article = document.createElement('article');
+        article.className = 'topic-card';
+        article.dataset.topicId = topic.createdAt;
+        article.setAttribute('tabindex', '0');
+
+        // Judul dan meta
+        const title = document.createElement('h3');
+        title.className = 'topic-title';
+        title.textContent = topic.title;
+        article.appendChild(title);
+
+        const meta = document.createElement('p');
+        meta.className = 'topic-meta';
+        const author = topic.author || 'Anonim';
+        meta.textContent = `Dibuat oleh: ${author} pada ${new Date(topic.createdAt).toLocaleString()}`;
+        article.appendChild(meta);
+
+        // Delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-topic-btn';
+        deleteBtn.innerHTML = '&times;';
+        deleteBtn.setAttribute('aria-label', `Hapus topik: ${topic.title}`);
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (confirm(`Apakah Anda yakin ingin menghapus topik "${topic.title}"?`)) {
+            topics.splice(index, 1);
+            saveTopics(topics);
+            renderTopics();
+          }
+        });
+        article.appendChild(deleteBtn);
+
+        // Komentar
+        const commentsSection = document.createElement('div');
+        commentsSection.className = 'comments-section';
+
+        // Daftar komentar
+        const commentList = document.createElement('div');
+        commentList.className = 'comment-list';
+        const topicComments = topic.comments || [];
+        commentList.innerHTML = topicComments.length === 0 ? '<p style="color:#888;font-size:0.97rem;">Belum ada komentar.</p>' : '';
+        topicComments.forEach((c, i) => {
+          const card = document.createElement('div');
+          card.className = 'comment-card';
+          card.innerHTML = `<strong>${c.author || 'Anonim'}</strong><small>${c.time || ''}</small><span style="flex:1"></span>${c.text}`;
+          commentList.appendChild(card);
+        });
+        commentsSection.appendChild(commentList);
+
+        // Form komentar
+        const commentForm = document.createElement('form');
+        commentForm.className = 'comment-form';
+        commentForm.innerHTML = `
+          <input type="text" name="commentAuthor" placeholder="Nama Anda" required />
+          <textarea name="commentText" placeholder="Tulis komentar..." required rows="2"></textarea>
+          <button type="submit">Kirim Komentar</button>
+        `;
+        commentForm.onsubmit = function(e) {
+          e.preventDefault();
+          const author = commentForm.commentAuthor.value.trim() || 'Anonim';
+          const text = commentForm.commentText.value.trim();
+          if (!text) return;
+          const time = new Date().toLocaleString();
+          topic.comments = topic.comments || [];
+          topic.comments.push({ author, text, time });
+          saveTopics(topics);
+          renderTopics();
+        };
+        commentsSection.appendChild(commentForm);
+
+        article.appendChild(commentsSection);
+        topicListEl.appendChild(article);
+      });
+    }
+
+    // Event listener for form submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const authorName = document.getElementById('authorName').value;
+      const topicTitle = document.getElementById('topicTitle').value;
+      const topicContent = document.getElementById('topicContent').value;
+
+      if (authorName && topicTitle && topicContent) {
+        const newTopic = {
+          author: authorName,
+          title: topicTitle,
+          content: topicContent,
+          createdAt: new Date().toISOString(),
+          comments: []
+        };
+
+        const topics = loadTopics();
+        topics.push(newTopic);
+        saveTopics(topics);
+        renderTopics();
+
+        form.reset();
+      }
+    });
+
+    // Initialize topics
+    renderTopics();
+
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+      mobileNavOverlay.classList.toggle('is-open');
+      if (mobileNavOverlay.classList.contains('is-open')) {
+        document.body.classList.add('menu-open');
+        iconHamburger.style.display = 'none';
+        iconClose.style.display = 'inline';
+      } else {
+        document.body.classList.remove('menu-open');
+        iconHamburger.style.display = 'inline';
+        iconClose.style.display = 'none';
+      }
+    });
+
+    // Juga tutup menu jika klik di overlay luar menu
+    mobileNavOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileNavOverlay) {
+        mobileNavOverlay.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        iconHamburger.style.display = 'inline';
+        iconClose.style.display = 'none';
+      }
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+</body>
+</html>

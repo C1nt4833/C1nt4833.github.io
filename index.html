@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gerbang Kata - Informasi Speech Delay Profesional</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="src/gb.jpeg" type="image/png" />
+    <style>
+        @media (min-width: 900px) {
+            #about .section-title,
+            #info .section-title,
+            #signs .section-title,
+            #therapists .section-title,
+            #consult .section-title,
+            #videos .section-title,
+            #forum .section-title {
+                font-size: 2.8rem;
+            }
+            .video-item.card-3d {
+                padding: 0;
+                overflow: hidden;
+            }
+            .video-item a {
+                display: block;
+                position: relative;
+                padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            }
+            .video-item img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+            .video-item h3 {
+                padding: 1rem 1.5rem 1.5rem 1.5rem;
+                margin: 0;
+            }
+        }
+        @media (max-width: 899px) {
+            .video-item.card-3d {
+                padding: 0;
+                overflow: hidden;
+            }
+            .video-item a {
+                display: block;
+                position: relative;
+                padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            }
+            .video-item img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+            .video-item h3 {
+                padding: 0.8rem 1rem 1rem 1rem;
+                margin: 0;
+                font-size: 0.9rem;
+            }
+        }
+        .music-btn {
+            background: none;
+            border: none;
+            margin-left: 10px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: color 0.2s;
+            outline: none;
+            position: relative;
+        }
+        .music-btn-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9c74f 60%, #f9844a 100%);
+            box-shadow: 0 2px 8px rgba(249, 199, 79, 0.2);
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .music-btn:hover .music-btn-bg, .music-btn:focus .music-btn-bg {
+            box-shadow: 0 4px 16px rgba(249, 199, 79, 0.4);
+            background: linear-gradient(135deg, #f9844a 60%, #f9c74f 100%);
+        }
+        .music-btn i {
+            color: #fff;
+            font-size: 1.4em;
+            transition: transform 0.3s;
+        }
+        .music-btn.playing .music-btn-bg {
+            background: linear-gradient(135deg, #43aa8b 60%, #f9c74f 100%);
+            box-shadow: 0 4px 16px rgba(67, 170, 139, 0.3);
+        }
+        .music-btn.playing i {
+            animation: spin 1.2s linear infinite;
+            color: #fff;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .mobile-nav .logout-link {
+          display: block;
+          color: #e74c3c !important;
+          font-weight: bold;
+          margin-top: 16px;
+          background: #fff0f0;
+          border-radius: 8px;
+          text-align: center;
+          padding: 12px 0;
+          border: 1px solid #e74c3c;
+        }
+    </style>
+    <script>
+    // Cek login status, jika belum login redirect ke login2.html
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login2.html';
+    }
+    </script>
+</head>
+<body>
+    <div class="mobile-nav-overlay">
+        <nav class="mobile-nav">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="artikel.html">Artikel</a>
+            <a href="profil.html">Terapis</a>
+            <a href="forum.html">Forum</a>
+            <a href="map.html">Peta</a>
+            <a href="deteksi-speech.html" id="deteksiSpeechMobile">Deteksi</a>
+            <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+            <a href="#" id="logoutBtnMobile" class="cta-button-nav logout-link" style="margin-top:10px;">Logout</a>
+        </nav>
+    </div>
+
+    <!-- New Unified Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo-link">
+                <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+                <span class="header-logo-text">Gerbang Kata</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="artikel.html">Artikel</a></li>
+                    <li><a href="profil.html">Terapis</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="map.html">Peta</a></li>
+                    <li><a href="deteksi-speech.html">Deteksi</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+                <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+                <button id="musicButton" class="music-btn" aria-label="Putar Musik">
+                  <span class="music-btn-bg">
+                    <i class="fas fa-music" id="musicIcon"></i>
+                  </span>
+                </button>
+                <audio id="heroMusic" src="src/galau.mp3"></audio>
+            </div>
+            <!-- Hamburger Image Slot -->
+            <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+              <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+              <span class="icon-close" style="display:none">&times;</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="site-header-hero-wrapper">
+        <!-- Hero Section -->
+        <section id="home" class="hero" tabindex="0" aria-label="Beranda Gerbang Kata">
+            <div class="hero-content">
+                <h2 class="hero-title">
+                    <span class="hero-title-blue">Memahami Speech</span><br>
+                    <span class="hero-title-orange">Delay pada Anak</span>
+                </h2>
+                <p>
+                    Dapatkan informasi lengkap dan terpercaya untuk membantu orang tua mengenali dan menangani keterlambatan bicara pada anak.
+                </p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <button class="cta-button" data-target="about">Pelajari Sekarang</button>
+                </div>
+            </div>
+            <div class="hero-image" aria-hidden="true">
+                <img src="src/cihuhy.webp" srcset="src/cihuhy.webp 480w, src/cihuhy.webp 1024w" alt="Ilustrasi Anak sedang terapi bicara" class="floating-image" />
+            </div>
+        </section>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Speech Delay -->
+        <section id="about" class="info-section" tabindex="0" aria-label="Tentang Speech Delay">
+            <h2 class="section-title">Apa itu Speech Delay?</h2>
+            <div class="info-card-container">
+                <article class="info-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                        <i class="fas fa-child icon-large"></i>
+                        <h3>Definisi</h3>
+                        </div>
+                     <div class="card-back">
+                        <p>
+                            Speech delay adalah kondisi ketika kemampuan bicara anak berkembang lebih lambat dibandingkan anak seusianya. Hal ini dapat disebabkan oleh berbagai faktor dan perlu deteksi dini.
+                        </p>
+                    </div>
+                </article>
+                <article class="info-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                        <i class="fas fa-child icon-large"></i>
+                        <h3>Prevalensi</h3>
+                        </div>
+                     <div class="card-back">
+                        <p>5-10% anak prasekolah mengalami speech delay, dengan insiden lebih tinggi pada laki-laki dibanding perempuan.</p>
+                    </div>
+                </article>
+                <article class="info-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                        <i class="fas fa-child icon-large"></i>
+                        <h3>Pentingnya Deteksi Dini</h3>
+                        </div>
+                     <div class="card-back">
+                        <p>
+                            Deteksi dan intervensi dini dapat meningkatkan hasil perkembangan bicara dan komunikasi anak secara signifikan.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Detailed Information Accordion -->
+        <section id="info" class="more-info-section" tabindex="0" aria-label="Informasi Lengkap Speech Delay">
+            <h2 class="section-title">Informasi Lengkap Speech Delay</h2>
+
+            <nav class="info-nav">
+                <ul>
+                    <li><button class="info-link" data-acc="penyebab">Penyebab Speech Delay</button></li>
+                    <li><button class="info-link" data-acc="perbedaan">Perbedaan Speech Delay vs Autism</button></li>
+                    <li><button class="info-link" data-acc="faktor">Faktor Risiko</button></li>
+                    <li><button class="info-link" data-acc="kapan">Kapan Harus ke Dokter?</button></li>
+                    <li><button class="info-link" data-acc="studi">Studi Kasus & Statistik</button></li>
+                </ul>
+            </nav>
+
+            <div class="info-accordion">
+                <article class="accordion-item card-3d" id="penyebab">
+                    <button class="accordion-btn" aria-expanded="false">Penyebab Speech Delay</button>
+                    <div class="accordion-content" hidden>
+                        <ul>
+                            <li><strong>Gangguan pendengaran:</strong> Anak kesulitan mendengar sehingga sulit meniru suara.</li>
+                            <li><strong>Gangguan oral-motor:</strong> Masalah pada area mulut yang mempengaruhi produksi suara.</li>
+                            <li><strong>Gangguan spektrum autisme:</strong> Sering mempengaruhi perkembangan komunikasi.</li>
+                            <li><strong>Keterlambatan perkembangan umum:</strong> Bagian dari global developmental delay.</li>
+                            <li><strong>Faktor lingkungan:</strong> Kurang stimulasi bicara dari pengasuh.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item card-3d" id="perbedaan">
+                    <button class="accordion-btn" aria-expanded="false">Perbedaan Speech Delay vs Autism</button>
+                    <div class="accordion-content" hidden>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspek</th>
+                                    <th>Speech Delay</th>
+                                    <th>Autism</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Kontak mata</td><td>Normal</td><td>Sering kurang</td></tr>
+                                <tr><td>Interaksi sosial</td><td>Normal</td><td>Sulit berinteraksi</td></tr>
+                                <tr><td>Minat</td><td>Bervariasi</td><td>Sering terbatas/obsessif</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="accordion-item card-3d" id="faktor">
+                    <button class="accordion-btn" aria-expanded="false">Faktor Risiko Speech Delay</button>
+                    <div class="accordion-content" hidden>
+                        <ul>
+                            <li>Riwayat keluarga dengan gangguan bicara.</li>
+                            <li>Kelahiran prematur atau berat badan lahir rendah.</li>
+                            <li>Gangguan pendengaran yang tidak terdiagnosis.</li>
+                            <li>Kurangnya interaksi verbal pada anak.</li>
+                            <li>Gangguan neurologis atau perkembangan otak.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item card-3d" id="kapan">
+                    <button class="accordion-btn" aria-expanded="false">Kapan Harus ke Dokter?</button>
+                    <div class="accordion-content" hidden>
+                        <ul>
+                            <li>Anak tidak mengeluarkan suara apapun hingga usia 12 bulan.</li>
+                            <li>Tidak menunjukkan kemampuan meniru suara setelah 18 bulan.</li>
+                            <li>Perkembangan bicara sangat lambat setelah 2 tahun.</li>
+                            <li>Mengalami kesulitan berkomunikasi sosial.</li>
+                            <li>Terdapat gejala lain seperti keterlambatan motorik atau perkembangan umum.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item card-3d" id="studi">
+                    <button class="accordion-btn" aria-expanded="false">Studi Kasus & Statistik</button>
+                    <div class="accordion-content" hidden>
+                        <p>
+                            Menurut data WHO dan IDAI, sekitar 5-10% anak prasekolah di dunia mengalami speech delay. Intervensi dini terbukti meningkatkan kualitas hidup dan kemampuan sosial anak.
+                        </p>
+                        <p>
+                            Studi kasus menunjukkan bahwa terapi wicara yang konsisten dan dukungan keluarga sangat krusial dalam proses pemulihan.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        
+        <!-- Signs Section -->
+        <section id="signs" class="signs-section" tabindex="0" aria-label="Tanda-tanda Speech Delay">
+            <h2 class="section-title">Tanda-tanda Speech Delay</h2>
+            <div class="timeline" role="list">
+                <div class="timeline-item" role="listitem">
+                    <div class="timeline-content card-3d">
+                        <h3>12 Bulan</h3>
+                        <ul>
+                            <li>Tidak menggunakan gestur seperti menunjuk atau melambai.</li>
+                            <li>Tidak mengucapkan kata sederhana seperti "mama", "papa".</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                    <div class="timeline-content card-3d">
+                        <h3>18 Bulan</h3>
+                        <ul>
+                            <li>Kosakata kurang dari 10 kata.</li>
+                            <li>Sulit meniru suara atau kata.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                    <div class="timeline-content card-3d">
+                        <h3>2 Tahun</h3>
+                        <ul>
+                            <li>Kosakata kurang dari 50 kata.</li>
+                            <li>Tidak bisa menggabungkan 2 kata.</li>
+                            <li>Sulit memahami instruksi sederhana.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                    <div class="timeline-content card-3d">
+                        <h3>3 Tahun</h3>
+                        <ul>
+                            <li>Tidak bisa membuat kalimat dengan 3 kata.</li>
+                            <li>Sulit dipahami oleh orang yang tidak dikenal.</li>
+                            <li>Tidak bertanya.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Therapists Section -->
+        <section id="therapists" class="therapists-section" tabindex="0" aria-label="Database Terapis Wicara">
+            <h2 class="section-title">Lokasi Terapis</h2>
+            
+
+            <div class="therapist-list" id="therapistList" aria-live="polite" aria-relevant="additions removals">
+                <article class="therapist-card card-3d" tabindex="0">
+                    <div class="therapist-photo">
+                        <img src="src/labirin2.png" alt="Dr. Siti Rahayu" />
+                    </div>
+                    <div class="therapist-info">
+                        <h3>Labirin Children Center Kendari</h3>
+                        <p class="specialization">Klinik Tumbuh Kembang</p>
+                        <p class="specialization">& Center Terapis Anak</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Buka pukul 09.00 - 16.00</p>
+                        <p class="location">dari senin - sabtu</p>
+                        <p class="experience"><i class="fas fa-phone"></i>(Instagram -> labirinchildrencenter)</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span>4.5 (32 ulasan)</span>
+                        </div>
+                        <button class="detail-button" aria-label="Lihat lokasi labirin child center kendari" onclick="window.open('https://www.google.com/maps/place/Labirin+Children+Center/@-3.9681815,122.5167945,937m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2d98f35aeeda1981:0x6cef75cb84817aae!8m2!3d-3.9681869!4d122.5193641!16s%2Fg%2F11h8n1vl16?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D', '_blank')">Lihat Lokasi</button>
+                    </div>
+                </article>
+                <article class="therapist-card card-3d" tabindex="0">
+                    <div class="therapist-photo">
+                        <img src="src/amanah2.jpeg" alt="Dr. Budi Santoso" />
+                    </div>
+                    <div class="therapist-info">
+                        <h3>Yayasan Amanah Terapis Autis</h3>
+                        <p class="specialization">Kendari</p>
+                        <p class="specialization">Terapis Wicara</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Buka pukul 08.00 - 14.00</p>
+                        <p class="location">dari senin - sabtu</p>
+                        <p class="experience"><i class="fas fa-phone"></i>0821-4122-2893</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i>
+                            <span>5.0 (14 ulasan)</span>
+                        </div>
+                        <button class="detail-button" aria-label="Lihat lokasi yayasan amanah terapis autis kendari" onclick="window.open('https://www.google.com/maps/place/Jl.+Sao-Sao+BTN+I+No.4,+Bende,+Kec.+Kadia,+Kota+Kendari,+Sulawesi+Tenggara+93561/@-3.9869897,122.5171409,18.86z/data=!4m6!3m5!1s0x2d98f2b455c34717:0x5b23f4216baa038f!8m2!3d-3.986902!4d122.5177726!16s%2Fg%2F11thqjypr5?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D', '_blank')">Lihat Lokasi</button>
+                    </div>
+                </article>
+                <article class="therapist-card card-3d" tabindex="0">
+                    <div class="therapist-photo">
+                        <img src="src/montesari.png" alt="Dr. Budi Santoso" />
+                    </div>
+                    <div class="therapist-info">
+                        <h3>Yayasan Ruang Asa Montessori</h3>
+                        <p class="specialization">Kendari</p>
+                        <p class="specialization">Terapis Wicara</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Buka pukul 07.30 - 14.00</p>
+                        <p class="location">dari senin - jumat</p>
+                        <p class="experience"><i class="fas fa-phone"></i> 0878-1973-1945</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i>
+                            <span>4.0 (14 ulasan)</span>
+                        </div>
+                        <button class="detail-button" aria-label="Lihat yayasan ruang asa Montessori kendari" onclick="window.open('https://www.google.com/maps/place/Yayasan+Ruang+Asa+Montessori/@-3.9714153,122.5149417,937m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2d98f387304870a7:0xdf613f864aa4bb6e!8m2!3d-3.9714207!4d122.5175166!16s%2Fg%2F11q297t3dv?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D', '_blank')">Lihat Lokasi</button>
+                    </div>
+                </article>
+                <!-- Bisa ditambah profil lain di sini -->
+            </div>
+        </section>
+
+        <!-- Consultation Section -->
+        <section id="consult" class="consult-section" tabindex="0" aria-label="Form Konsultasi">
+            <h2 class="section-title">Konsultasi dengan Ahli</h2>
+            <div class="consult-form-container card-3d">
+                <form id="consultForm" class="consult-form" aria-label="Formulir konsultasi">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required aria-required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone" />
+                    </div>
+                    <div class="form-group">
+                        <label for="childAge">Usia Anak</label>
+                        <input type="text" id="childAge" name="childAge" required aria-required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="concern">Kekhawatiran Anda</label>
+                        <textarea id="concern" name="concern" rows="5" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Kirim Konsultasi</button>
+                </form>
+                <aside class="consult-info" aria-label="Tim Ahli">
+                    <h3>Tim Ahli Kami</h3>
+                    <article class="expert-card card-3d" tabindex="0">
+                        <img src="src/dr.andi.png" alt="Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog" />
+                        <h4>Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog</h4>
+                        <p>Psikolog Klinis</p>
+                    </article>
+                    <article class="expert-card card-3d" tabindex="0">
+                        <img src="src/karakter1.png" alt="Sri Nurul Ain S.Pd" />
+                        <h4>Sri Nurul Ain S.Pd</h4>
+                        <p>Terapis Wicara</p>
+                    </article>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="videos" class="video-section" tabindex="0" aria-label="Video Edukasi Speech Delay">
+            <h2 class="section-title">Video Edukasi Speech Delay</h2>
+            <div class="video-grid" role="list">
+            
+              <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=UXE9wefqzAw" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.youtube.com/vi/UXE9wefqzAw/0.jpg" title="Anak terlambat bicara? Bicara belum lancar? Kenali Gangguan Bicara Pada Anak." allowfullscreen></img>
+                    </a>
+                <h3>Anak terlambat bicara? Bicara belum lancar? Kenali Gangguan Bicara Pada Anak.</h3>
+              </article>
+
+              <article class="video-item card-3d" role="listitem" tabindex="0">
+               <a href="https://www.youtube.com/watch?v=28nGmeiHFSw" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.youtube.com/vi/28nGmeiHFSw/0.jpg" title="Keterlambatan Bicara. Apa saja terapinya?" allowfullscreen></img>
+                    </a>    
+                <h3>Keterlambatan Bicara. Apa saja terapinya?</h3>
+              </article>
+
+              <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=MOx7JBs_-r0" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/MOx7JBs_-r0/0.jpg" title="Kenali Ciri-ciri dan Penyebab Speech Delay pada Anak - dr. Anggia Hapsari, SpKJ (K)" allowfullscreen></img>
+                     </a>    
+                 <h3>Kenali Ciri-ciri dan Penyebab Speech Delay pada Anak - dr. Anggia Hapsari, SpKJ (K)</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=66bxsDs7ymw" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/66bxsDs7ymw/0.jpg" title="Mengenal Autisme : Cara Praktis mengatasi Anak Speech Delay / Terlambat Bicara" allowfullscreen></img>
+                     </a>    
+                 <h3>Mengenal Autisme : Cara Praktis mengatasi Anak Speech Delay / Terlambat Bicara</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=84An_3XTvTM" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/84An_3XTvTM/0.jpg" title="Anak saya terlambat bicara atau gangguan bahasa? Apa bedanya?" allowfullscreen></img>
+                     </a>    
+                 <h3>Anak saya terlambat bicara atau gangguan bahasa? Apa bedanya?</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=jxzY43diQ2g" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/jxzY43diQ2g/0.jpg" title="Anak Belum Bicara, Kapan Harus Waspada?" allowfullscreen></img>
+                     </a>    
+                 <h3>Anak Belum Bicara, Kapan Harus Waspada?</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=lexLquKmcTI" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/lexLquKmcTI/0.jpg" title="Mengenal Kata Untuk Balita - Kata Pertama Bayi, Lagu Interaktif, Mengenal Hewan Bersama Kak Nisa" allowfullscreen></img>
+                     </a>    
+                 <h3>Mengenal Kata Untuk Balita - Kata Pertama Bayi, Lagu Interaktif, Mengenal Hewan Bersama Kak Nisa</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=Mm3-gk9bdiE" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/Mm3-gk9bdiE/0.jpg" title="Belajar Untuk Bayi Dan Balita - Kata Pertama, Lagu dan Nursery Rhymes Untuk Bayi Bersama Kak Nisa" allowfullscreen></img>
+                     </a>    
+                 <h3>Belajar Untuk Bayi Dan Balita - Kata Pertama, Lagu dan Nursery Rhymes Untuk Bayi Bersama Kak Nisa</h3>
+               </article>
+
+               <article class="video-item card-3d" role="listitem" tabindex="0">
+                <a href="https://www.youtube.com/watch?v=dQW_SDcXDNg" target="_blank" rel="noopener noreferrer">
+                     <img src="https://img.youtube.com/vi/dQW_SDcXDNg/0.jpg" title="Belajar Bicara Untuk Balita - Kata Pertama Bayi, Tumbuh Kembang Anak, Lagu Interaktif - Kak Nisa" allowfullscreen></img>
+                     </a>    
+                 <h3>Belajar Bicara Untuk Balita - Kata Pertama Bayi, Tumbuh Kembang Anak, Lagu Interaktif - Kak Nisa</h3>
+               </article>
+            </div>
+          </section>
+          
+
+        <!-- Forum Section -->
+        <section id="forum" class="forum-section" tabindex="0" aria-label="Forum Diskusi Orang Tua">
+            <h2 class="section-title">Forum Diskusi Orang Tua</h2>
+            <div class="forum-container card-3d">
+                <div class="forum-topics" role="region" aria-label="Topik diskusi terkini">
+                    <h3>Topik Terkini</h3>
+                    <article class="topic-item" tabindex="0" aria-label="Topik anak 2 tahun belum bisa bicara">
+                        <h4>Anak 2 tahun belum bisa bicara</h4>
+                        <p class="topic-meta">Oleh: Ibu Rina - 2 hari lalu - 15 komentar</p>
+                        <p class="topic-excerpt">Anak saya usia 2 tahun 3 bulan tapi hanya bisa mengatakan "mama" dan "papa". Apakah ini termasuk speech delay?</p>
+                        <a href="#" class="read-more" tabindex="0">Baca selengkapnya →</a>
+                    </article>
+                    <article class="topic-item" tabindex="0" aria-label="Topik terapi wicara di rumah">
+                        <h4>Terapi wicara di rumah</h4>
+                        <p class="topic-meta">Oleh: Budi Santoso - 1 minggu lalu - 32 komentar</p>
+                        <p class="topic-excerpt">Berbagi pengalaman melakukan terapi wicara mandiri di rumah selama pandemi...</p>
+                        <a href="#" class="read-more" tabindex="0">Baca selengkapnya →</a>
+                    </article>
+                    <button class="cta-button" aria-label="Lihat Semua Topik">Lihat Semua Topik</button>
+                </div>
+                <div class="forum-form" role="region" aria-label="Form mulai diskusi baru">
+                    <h3>Mulai Diskusi Baru</h3>
+                    <form id="newTopicForm">
+                        <div class="form-group">
+                            <label for="topicTitle">Judul Topik</label>
+                            <input type="text" id="topicTitle" required aria-required="true" />
+                        </div>
+                        <div class="form-group">
+                            <label for="topicContent">Isi Diskusi</label>
+                            <textarea id="topicContent" rows="5" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Posting Diskusi</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+        <!-- Footer -->
+        <footer class="footer-3d" role="contentinfo">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Gerbang Kata</h3>
+                    <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-envelope"></i> infogerbangkata@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 085215224661 </br>(Cinta Wardana)</p>
+                    <p><i class="fas fa-phone"></i> 087766760195 </br>(Rezky Alya Pasrun)</p>
+                    <p><i class="fas fa-phone"></i> 082328238104 </br>(Miqdad Asyraf Rizqullah)</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="artikel.html">Artikel</a></li>
+                        <li><a href="profil.html">Terapis</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="deteksi-speech.html">Deteksi</a></li>
+                        <li><a href="permainan.html">Game</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gerbang Kata. Semua hak dilindungi.</p>
+            </div>
+        </footer>
+    </main>
+
+    <button id="backToTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+
+    <script>
+        const hamburgerToggle = document.querySelector('#hamburger-toggle');
+        const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mainHeader = document.querySelector('.main-header');
+        const iconHamburger = document.querySelector('.icon-hamburger');
+        const iconClose = document.querySelector('.icon-close');
+
+        hamburgerToggle.addEventListener('click', () => {
+            mobileNavOverlay.classList.toggle('is-open');
+            if (mobileNavOverlay.classList.contains('is-open')) {
+                document.body.classList.add('menu-open');
+                iconHamburger.style.display = 'none';
+                iconClose.style.display = 'inline';
+            } else {
+                document.body.classList.remove('menu-open');
+                iconHamburger.style.display = 'inline';
+                iconClose.style.display = 'none';
+            }
+        });
+
+        // Juga tutup menu jika klik di overlay luar menu
+        mobileNavOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileNavOverlay) {
+                mobileNavOverlay.classList.remove('is-open');
+                document.body.classList.remove('menu-open');
+                iconHamburger.style.display = 'inline';
+                iconClose.style.display = 'none';
+            }
+        });
+
+        // Tambahkan event listener untuk tombol logout di mobile
+        const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+        if (logoutBtnMobile) {
+          logoutBtnMobile.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login2.html';
+          });
+        }
+    </script>
+
+    <script>
+      const musicButton = document.getElementById('musicButton');
+      const heroMusic = document.getElementById('heroMusic');
+      const musicIcon = document.getElementById('musicIcon');
+      let isPlaying = false;
+
+      musicButton.addEventListener('click', function() {
+        if (isPlaying) {
+          heroMusic.pause();
+          heroMusic.currentTime = 0;
+          isPlaying = false;
+          musicButton.classList.remove('playing');
+        } else {
+          heroMusic.play();
+          isPlaying = true;
+          musicButton.classList.add('playing');
+        }
+      });
+
+      heroMusic.addEventListener('ended', function() {
+        isPlaying = false;
+        musicButton.classList.remove('playing');
+      });
+    </script>
+
+    </script>
+    <script>
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+    </script>
+</body>
+</html>

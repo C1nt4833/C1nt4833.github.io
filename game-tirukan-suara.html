@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirukan Suara - Gerbang Kata</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Reset dan Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      color: #003344;
+    }
+    
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: #4a6fa5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+    .back-button:hover {
+      background: #3556a9;
+      transform: translateY(-2px);
+    }
+    
+    /* Header Styles */
+    .game-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .game-logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+    
+    .game-title {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+      color: #0066cc;
+      text-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+    }
+    
+    .game-subtitle {
+      color: #005588;
+      font-size: 1.1rem;
+    }
+    
+    /* Game Container */
+    .game-container {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2);
+      text-align: center;
+    }
+    
+    /* Game Content */
+    .animal-card {
+      margin-bottom: 30px;
+    }
+    
+    .animal-image {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+    
+    .animal-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .animal-name {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #004466;
+    }
+    
+    /* Game Controls */
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .game-btn {
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .play-btn {
+      background: #00aaff;
+      color: white;
+    }
+    
+    .success-btn {
+      background: #4CAF50;
+      color: white;
+    }
+    
+    .tryagain-btn {
+      background: #FFC107;
+      color: #333;
+    }
+    
+    .game-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .game-btn:active {
+      transform: translateY(1px);
+    }
+    
+    /* Game Info */
+    .game-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px solid #e0f7ff;
+    }
+    
+    .game-score {
+      font-weight: bold;
+      color: #0066cc;
+    }
+    
+    .game-progress {
+      font-weight: bold;
+      color: #009688;
+    }
+    
+    /* Feedback */
+    .feedback {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      animation: fadeIn 0.5s;
+    }
+    
+    .feedback.success {
+      background: rgba(76, 175, 80, 0.2);
+      color: #2E7D32;
+    }
+    
+    .feedback.warning {
+      background: rgba(255, 193, 7, 0.2);
+      color: #FF8F00;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .game-container {
+        padding: 20px;
+      }
+      
+      .animal-image {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .game-controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .game-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="window.location.href='permainan.html'">
+    <i class="fas fa-arrow-left"></i> Kembali ke Permainan
+  </button>
+
+  <header class="game-header">
+    <img src="src/gerbangkata.png" alt="Logo Gerbang Kata" class="game-logo">
+    <h1 class="game-title">Tirukan Suara</h1>
+    <p class="game-subtitle">Latihan meniru suara hewan dan benda sehari-hari</p>
+  </header>
+  
+  <main class="game-container">
+    <div class="animal-card">
+      <img id="animalImage" src="" alt="Gambar Hewan" class="animal-image">
+      <h2 id="animalName" class="animal-name">Memuat...</h2>
+      <button id="playSoundBtn" class="game-btn play-btn">
+        <i class="fas fa-volume-up"></i> Dengarkan Suara
+      </button>
+      <audio id="animalSound"></audio>
+    </div>
+    
+    <div class="game-controls">
+      <button id="successBtn" class="game-btn success-btn">
+        <i class="fas fa-thumbs-up"></i> Berhasil Ditiru
+      </button>
+      <button id="tryAgainBtn" class="game-btn tryagain-btn">
+        <i class="fas fa-redo"></i> Coba Lagi
+      </button>
+    </div>
+    
+    <div id="feedback" class="feedback" style="display: none;"></div>
+    
+    <div class="game-info">
+      <div class="game-score">Poin: <span id="score">0</span></div>
+      <div class="game-progress">Tahap: <span id="progress">1</span>/<span id="totalItems">0</span></div>
+    </div>
+  </main>
+
+  <script>
+    // Data Game
+    const gameData = [
+      {
+        name: "Anjing",
+        image: "src/game/images/anjing.png",
+        sound: "src/game/sounds/anjing.mp3",
+        text: "Guk guk!"
+      },
+      {
+        name: "Kucing",
+        image: "src/game/images/kucing.png",
+        sound: "src/game/sounds/kucing.mp3",
+        text: "Meong!"
+      },
+      {
+        name: "Sapi",
+        image: "src/game/images/sapi.png",
+        sound: "src/game/sounds/sapi.mp3",
+        text: "Mooo!"
+      },
+      {
+        name: "Mobil",
+        image: "src/game/images/mobil.png",
+        sound: "src/game/sounds/mobil.mp3",
+        text: "Broom broom!"
+      },
+      {
+        name: "Pintu",
+        image: "src/game/images/pintu.png",
+        sound: "src/game/sounds/pintu.mp3",
+        text: "Kreek!"
+      }
+    ];
+
+    // Elemen Game
+    const animalImage = document.getElementById('animalImage');
+    const animalName = document.getElementById('animalName');
+    const animalSound = document.getElementById('animalSound');
+    const playSoundBtn = document.getElementById('playSoundBtn');
+    const successBtn = document.getElementById('successBtn');
+    const tryAgainBtn = document.getElementById('tryAgainBtn');
+    const feedbackEl = document.getElementById('feedback');
+    const scoreEl = document.getElementById('score');
+    const progressEl = document.getElementById('progress');
+    const totalItemsEl = document.getElementById('totalItems');
+
+    // Variabel Game
+    let currentIndex = 0;
+    let score = 0;
+    let canPlay = true;
+
+    // Inisialisasi Game
+    function initGame() {
+      totalItemsEl.textContent = gameData.length;
+      loadAnimal(currentIndex);
+      
+      // Event Listeners
+      playSoundBtn.addEventListener('click', playSound);
+      successBtn.addEventListener('click', () => handleFeedback(true));
+      tryAgainBtn.addEventListener('click', () => handleFeedback(false));
+    }
+
+    // Memuat hewan berdasarkan index
+    function loadAnimal(index) {
+      if (index < gameData.length) {
+        const animal = gameData[index];
+        animalImage.src = animal.image;
+        animalName.textContent = animal.name;
+        animalSound.src = animal.sound;
+        progressEl.textContent = index + 1;
+        canPlay = true;
+      } else {
+        // Game selesai
+        showFeedback(`Permainan selesai! Skor akhir: ${score}`, 'success');
+        setTimeout(() => {
+          if (confirm("Permainan selesai! Mulai lagi?")) {
+            resetGame();
+          }
+        }, 2000);
+      }
+    }
+
+    // Memainkan suara
+    function playSound() {
+      if (!canPlay) return;
+      
+      animalSound.currentTime = 0;
+      animalSound.play();
+      
+      // Animasi tombol
+      playSoundBtn.innerHTML = '<i class="fas fa-volume-up"></i> Memutar...';
+      setTimeout(() => {
+        playSoundBtn.innerHTML = '<i class="fas fa-volume-up"></i> Dengarkan Suara';
+      }, 1500);
+    }
+
+    // Menangani feedback
+    function handleFeedback(isSuccess) {
+      if (!canPlay) return;
+      canPlay = false;
+      
+      const currentAnimal = gameData[currentIndex];
+      
+      if (isSuccess) {
+        score += 10;
+        scoreEl.textContent = score;
+        showFeedback(`Bagus! Tirukan: "${currentAnimal.text}"`, 'success');
+      } else {
+        showFeedback(`Coba tirukan: "${currentAnimal.text}"`, 'warning');
+      }
+      
+      // Lanjut ke hewan berikutnya setelah 2 detik
+      setTimeout(() => {
+        currentIndex++;
+        loadAnimal(currentIndex);
+        feedbackEl.style.display = 'none';
+      }, 2000);
+    }
+
+    // Menampilkan feedback
+    function showFeedback(message, type) {
+      feedbackEl.textContent = message;
+      feedbackEl.className = `feedback ${type}`;
+      feedbackEl.style.display = 'block';
+    }
+
+    // Reset game
+    function resetGame() {
+      currentIndex = 0;
+      score = 0;
+      scoreEl.textContent = '0';
+      loadAnimal(currentIndex);
+      feedbackEl.style.display = 'none';
+    }
+
+    // Font Awesome untuk ikon
+    document.addEventListener('DOMContentLoaded', () => {
+      const faScript = document.createElement('script');
+      faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
+      faScript.crossOrigin = 'anonymous';
+      document.head.appendChild(faScript);
+      
+      initGame();
+    });
+  </script>
+</body>
+</html>

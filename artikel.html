@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artikel Edukasi - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" href="assets/img/gerbangkata.png" type="image/png" />
+  <style>
+    /* Desktop: Perbesar card dan judul, beri margin agar tidak kena frame */
+    @media (min-width: 900px) {
+      .article-list {
+        padding: 0 3vw;
+      }
+      .article-card {
+        font-size: 1.18rem;
+        padding: 2.2rem 2.5rem 1.7rem 2.5rem;
+        margin-bottom: 2.5rem;
+        border-radius: 28px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 6px 24px 0 rgba(80,120,200,0.13);
+      }
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2.2rem;
+      }
+      .article-card h3 {
+        font-size: 1.45rem;
+      }
+    }
+    /* Mobile: Atur ulang layout agar rapi dan tidak mepet */
+    @media (max-width: 899px) {
+      .section-title,
+      .article-card {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+      }
+      .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+      .article-card {
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+        text-align: left;
+      }
+      .article-card h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body class="articles-page">
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html" class="active">Artikel</a>
+      <a href="profil.html">Terapis</a>
+      <a href="forum.html">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="deteksi-speech.html">Deteksi</a>
+      <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+    </nav>
+  </div>
+
+  <!-- Header & Navigation Baru -->
+  <header class="main-header">
+    <div class="header-container">
+      <a href="index.html" class="header-logo-link">
+        <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+        <span class="header-logo-text">Gerbang Kata</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="artikel.html" class="active">Artikel</a></li>
+          <li><a href="profil.html">Terapis</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="map.html">Peta</a></li>
+          <li><a href="deteksi-speech.html">Deteksi</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+        <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+      </div>
+      <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+        <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+        <span class="icon-close" style="display:none">&times;</span>
+      </button>
+    </div>
+  </header>
+  <!-- End Header & Navigation Baru -->
+
+  <!-- Main Content -->
+  <main>
+    <section class="info-section" tabindex="0" aria-label="Artikel Edukasi Speech Delay">
+      <h2 class="section-title">Artikel Edukasi Speech Delay</h2>
+
+      <div class="article-list">
+        <article class="article-card card-3d" tabindex="0">
+          <h3>5 Cara Meningkatkan Perkembangan Bicara Anak</h3>
+          <p>Perkembangan bicara anak sangat penting untuk komunikasi dan sosialnya. Berikut beberapa cara membantu:</p>
+          <a href="artikel-detail.html?id=1" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Tanda-tanda Speech Delay yang Perlu Diwaspadai</h3>
+          <p>Mengenali tanda dini speech delay agar dapat intervensi tepat waktu.</p>
+          <a href="artikel-detail.html?id=2" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Peran Terapis Wicara dalam Mengatasi Speech Delay</h3>
+          <p>Terapis wicara memiliki peran besar dalam membantu anak yang mengalami keterlambatan bicara.</p>
+          <a href="artikel-detail.html?id=3" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Tips Mendukung Anak dengan Speech Delay di Rumah</h3>
+          <p>Orang tua berperan penting dalam perkembangan bicara anak.</p>
+          <a href="artikel-detail.html?id=4" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Pengaruh Nutrisi terhadap Perkembangan Bicara Anak</h3>
+          <p>Nutrisi sangat penting bagi perkembangan otak dan bahasa anak.</p>
+          <a href="artikel-detail.html?id=5" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Penyebab Utama Speech Delay pada Anak</h3>
+          <p>Mengetahui penyebab speech delay penting untuk penanganan cepat.</p>
+          <a href="artikel-detail.html?id=6" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Perbedaan Speech Delay dan Gangguan Autisme</h3>
+          <p>Speech delay dan autisme memiliki ciri yang mirip tapi berbeda.</p>
+          <a href="artikel-detail.html?id=7" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Bagaimana Cara Kerja Terapi Wicara?</h3>
+          <p>Terapi wicara membantu anak berlatih bicara secara bertahap dan terstruktur.</p>
+          <a href="artikel-detail.html?id=8" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Peran Keluarga dalam Mendukung Terapi Anak</h3>
+          <p>Keterlibatan keluarga sangat berpengaruh dalam proses terapi bicara.</p>
+          <a href="artikel-detail.html?id=9" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Tips Memilih Terapis Wicara yang Tepat</h3>
+          <p>Memilih terapis wicara yang tepat sangat penting bagi kemajuan anak. </p>
+          <a href="artikel-detail.html?id=10" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Latihan Bicara yang Bisa Dilakukan di Rumah</h3>
+          <p>Latihan sederhana di rumah bisa bantu anak dengan speech delay berkembang lebih cepat</p>
+          <a href="artikel-detail.html?id=11" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Efek Gadget terhadap Kemampuan Bicara Anak</h3>
+          <p>Penggunaan gadget secara berlebihan bisa memperlambat kemampuan bicara anak</p>
+          <a href="artikel-detail.html?id=12" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Kapan Harus Membawa Anak ke Dokter?</h3>
+          <p>Kenali tanda-tanda kapan anak perlu konsultasi profesional</p>
+          <a href="artikel-detail.html?id=13" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Alasan Pentingnya Stimulasi Verbal dalam di Rumah</h3>
+          <p>Stimulasi verbal dari orang tua sangat berperan dalam perkembangan bicara anak</p>
+          <a href="artikel-detail.html?id=14" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Bagaimana Mendeteksi Speech Delay pada Bayi</h3>
+          <p>Mendeteksi sejak dini bisa membuat penanganan lebih cepat dan efektif.</p>
+          <a href="artikel-detail.html?id=15" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Mitos dan Fakta tentang Speech Delay</h3>
+          <p>Banyak anggapan keliru soal speech delay. Yuk, kenali mitos dan faktanya</p>
+          <a href="artikel-detail.html?id=16" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Manfaat Terapi Wicara untuk Anak Berkebutuhan Khusus</h3>
+          <p>Bukan hanya untuk speech delay, terapi wicara juga penting bagi anak dengan kebutuhan khusus.</p>
+          <a href="artikel-detail.html?id=17" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Studi Kasus Speech Delay dan Terapi Sukses</h3>
+          <p>Contoh nyata bisa memberi harapan bagi orang tua yang sedang berjuang.</p>
+          <a href="artikel-detail.html?id=18" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Pengaruh Lingkungan pada Perkembangan Bicara Anak</h3>
+          <p>Bagaimana lingkungan sekitar dan interaksi sosial mempengaruhi kemampuan bicara anak.</p>
+          <a href="artikel-detail.html?id=19" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Peran Teknologi dalam Terapi Wicara Modern</h3>
+          <p>Teknologi kini membantu memperkuat proses terapi bicara anak.</p>
+          <a href="artikel-detail.html?id=20" class="read-more">Baca selengkapnya →</a>
+        </article>
+        <article class="article-card card-3d" tabindex="0">
+          <h3>Perjalanan Emosional Orang Tua dalam Menghadapi Speech Delay</h3>
+          <p>Menghadapi anak dengan speech delay tidak mudah bagi orang tua. </p>
+          <a href="artikel-detail.html?id=21" class="read-more">Baca selengkapnya →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-3d" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Tentang Gerbang Kata</h3>
+        <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Kontak</h3>
+        <p><i class="fas fa-envelope"></i> infogerbangkata@gmail.com</p>
+        <p><i class="fas fa-phone"></i> 085215224661 </br>(Cinta Wardana)</p>
+        <p><i class="fas fa-phone"></i> 087766760195 </br>(Rezky Alya Pasrun)</p>
+        <p><i class="fas fa-phone"></i> 082328238104 </br>(Miqdad Asyraf Rizqullah)</p>
+      </div>
+      <div class="footer-section">
+        <h3>Tautan Cepat</h3>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="profil.html">Terapis</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="permainan.html">Game</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Gerbang Kata. Semua hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mainHeader = document.querySelector('.main-header');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+        mobileNavOverlay.classList.toggle('is-open');
+        if (mobileNavOverlay.classList.contains('is-open')) {
+            document.body.classList.add('menu-open');
+            iconHamburger.style.display = 'none';
+            iconClose.style.display = 'inline';
+        } else {
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // Juga tutup menu jika klik di overlay luar menu
+    mobileNavOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileNavOverlay) {
+            mobileNavOverlay.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+</body>
+</html>

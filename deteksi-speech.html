@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Speech Delay - Gerbang Kata</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="deteksi-speech.css?v=2" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="src/gb.jpeg" type="image/png" />
+    <script>
+    // Cek login status, jika belum login redirect ke login2.html
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login2.html';
+    }
+    </script>
+</head>
+<body>
+    <div class="mobile-nav-overlay">
+        <nav class="mobile-nav">
+            <a href="index.html">Beranda</a>
+            <a href="artikel.html">Artikel</a>
+            <a href="profil.html">Terapis</a>
+            <a href="forum.html">Forum</a>
+            <a href="map.html">Peta</a>
+            <a href="deteksi-speech.html" class="active">Deteksi</a>
+            <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo-link">
+                <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+                <span class="header-logo-text">Gerbang Kata</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="artikel.html">Artikel</a></li>
+                    <li><a href="profil.html">Terapis</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="map.html">Peta</a></li>
+                    <li><a href="deteksi-speech.html" class="active">Deteksi</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+                <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+            </div>
+            <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+                <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+                <span class="icon-close" style="display:none">&times;</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="detection-hero">
+            <div class="hero-content">
+                <h1>Deteksi Speech Delay</h1>
+                <p>Alat bantu untuk mendeteksi kemungkinan speech delay pada anak berdasarkan usia dan kemampuan bicara</p>
+            </div>
+        </section>
+
+        <!-- Detection Form Section -->
+        <section class="detection-section">
+            <div class="container">
+                <div class="detection-form-container card-3d">
+                    <h2>Form Deteksi Speech Delay</h2>
+                    <p class="form-description">
+                        Isi form di bawah ini dengan informasi yang akurat tentang perkembangan bicara anak Anda. 
+                        Sistem akan menganalisis dan memberikan hasil deteksi berdasarkan standar perkembangan anak.
+                    </p>
+                    
+                    <form id="detectionForm" class="detection-form">
+                        <div class="form-group">
+                            <label for="childName">Nama Anak</label>
+                            <input type="text" id="childName" name="childName" required placeholder="Masukkan nama anak">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="childAge">Usia Anak (dalam bulan)</label>
+                            <input type="number" id="childAge" name="childAge" min="1" max="72" required placeholder="Contoh: 24">
+                            <small>Masukkan usia dalam bulan (1-72 bulan)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Jenis Kelamin</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="laki-laki">Laki-laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="milestone-section">
+                            <h3>Kemampuan Bicara Anak</h3>
+                            
+                            <div class="milestone-group">
+                                <h4>Kosakata</h4>
+                                <div class="form-group">
+                                    <label for="vocabulary">Berapa kata yang sudah bisa diucapkan anak?</label>
+                                    <input type="number" id="vocabulary" name="vocabulary" min="0" placeholder="Contoh: 10">
+                                </div>
+                            </div>
+
+                            <div class="milestone-group">
+                                <h4>Kemampuan Kalimat</h4>
+                                <div class="form-group">
+                                    <label for="sentenceLength">Panjang kalimat maksimal yang bisa dibuat:</label>
+                                    <select id="sentenceLength" name="sentenceLength" required>
+                                        <option value="">Pilih kemampuan</option>
+                                        <option value="0">Belum bisa bicara sama sekali</option>
+                                        <option value="1">1 kata</option>
+                                        <option value="2">2 kata</option>
+                                        <option value="3">3 kata</option>
+                                        <option value="4">4 kata atau lebih</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="milestone-group">
+                                <h4>Kemampuan Komunikasi</h4>
+                                <div class="form-group">
+                                    <label>Apakah anak bisa:</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="canPoint" id="canPoint">
+                                            <span class="checkmark"></span>
+                                            Menunjuk benda yang diinginkan
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="canWave" id="canWave">
+                                            <span class="checkmark"></span>
+                                            Melambai (bye-bye)
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="canFollow" id="canFollow">
+                                            <span class="checkmark"></span>
+                                            Mengikuti instruksi sederhana
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="canAsk" id="canAsk">
+                                            <span class="checkmark"></span>
+                                            Bertanya (apa, siapa, dimana)
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="canImitate" id="canImitate">
+                                            <span class="checkmark"></span>
+                                            Meniru suara atau kata
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="milestone-group">
+                                <h4>Kemampuan Pemahaman</h4>
+                                <div class="form-group">
+                                    <label for="understanding">Seberapa baik anak memahami perkataan orang lain?</label>
+                                    <select id="understanding" name="understanding" required>
+                                        <option value="">Pilih tingkat pemahaman</option>
+                                        <option value="1">Sangat kurang (hampir tidak mengerti)</option>
+                                        <option value="2">Kurang (mengerti sedikit)</option>
+                                        <option value="3">Cukup (mengerti sebagian besar)</option>
+                                        <option value="4">Baik (mengerti hampir semua)</option>
+                                        <option value="5">Sangat baik (mengerti semua)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="milestone-group">
+                                <h4>Kekhawatiran Tambahan</h4>
+                                <div class="form-group">
+                                    <label for="concerns">Ceritakan kekhawatiran Anda tentang perkembangan bicara anak:</label>
+                                    <textarea id="concerns" name="concerns" rows="4" placeholder="Contoh: Anak saya belum bisa mengucapkan kata 'mama' padahal sudah 18 bulan..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="detect-button">
+                            <i class="fas fa-search"></i>
+                            Deteksi Speech Delay
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Result Section -->
+                <div id="resultSection" class="result-section card-3d" style="display: none;">
+                    <h2>Hasil Deteksi</h2>
+                    <div id="resultContent"></div>
+                    <div class="result-actions">
+                        <button id="newDetection" class="secondary-button">
+                            <i class="fas fa-redo"></i>
+                            Deteksi Baru
+                        </button>
+                        <button id="saveResult" class="primary-button">
+                            <i class="fas fa-download"></i>
+                            Simpan Hasil
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Section -->
+        <section class="info-section">
+            <div class="container">
+                <h2>Informasi Penting</h2>
+                <div class="info-grid">
+                    <div class="info-card card-3d">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Disclaimer</h3>
+                        <p>Hasil deteksi ini hanya sebagai alat bantu awal dan tidak menggantikan diagnosis dari tenaga medis profesional. Konsultasikan dengan dokter atau terapis wicara untuk evaluasi yang lebih akurat.</p>
+                    </div>
+                    <div class="info-card card-3d">
+                        <i class="fas fa-clock"></i>
+                        <h3>Kapan Harus Konsultasi</h3>
+                        <p>Segera konsultasi ke dokter jika anak menunjukkan tanda-tanda keterlambatan bicara yang signifikan atau jika Anda merasa khawatir tentang perkembangannya.</p>
+                    </div>
+                    <div class="info-card card-3d">
+                        <i class="fas fa-heart"></i>
+                        <h3>Intervensi Dini</h3>
+                        <p>Deteksi dan intervensi dini sangat penting untuk hasil terbaik. Semakin cepat terapi dimulai, semakin baik hasilnya.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-3d" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Gerbang Kata</h3>
+                <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <p><i class="fas fa-envelope"></i> infogerbangkata@gmail.com</p>
+                <p><i class="fas fa-phone"></i> 085215224661 </br>(Cinta Wardana)</p>
+                <p><i class="fas fa-phone"></i> 087766760195 </br>(Rezky Alya Pasrun)</p>
+                <p><i class="fas fa-phone"></i> 082328238104 </br>(Miqdad Asyraf Rizqullah)</p>
+            </div>
+            <div class="footer-section">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="artikel.html">Artikel</a></li>
+                    <li><a href="profil.html">Terapis</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="deteksi-speech.html">Deteksi</a></li>
+                    <li><a href="permainan.html">Game</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Gerbang Kata. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="deteksi-speech.js"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburgerToggle = document.querySelector('#hamburger-toggle');
+        const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+        const iconHamburger = document.querySelector('.icon-hamburger');
+        const iconClose = document.querySelector('.icon-close');
+
+        hamburgerToggle.addEventListener('click', () => {
+            mobileNavOverlay.classList.toggle('is-open');
+            if (mobileNavOverlay.classList.contains('is-open')) {
+                document.body.classList.add('menu-open');
+                iconHamburger.style.display = 'none';
+                iconClose.style.display = 'inline';
+            } else {
+                document.body.classList.remove('menu-open');
+                iconHamburger.style.display = 'inline';
+                iconClose.style.display = 'none';
+            }
+        });
+
+        mobileNavOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileNavOverlay) {
+                mobileNavOverlay.classList.remove('is-open');
+                document.body.classList.remove('menu-open');
+                iconHamburger.style.display = 'inline';
+                iconClose.style.display = 'none';
+            }
+        });
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login2.html';
+            });
+        }
+    </script>
+</body>
+</html> 

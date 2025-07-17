@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detail Artikel - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body.article-detail-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: url('src/memahami speech delay pada anak.webp') no-repeat center center !important;
+      background-size: cover !important;
+    }
+
+    main {
+      flex: 1 0 auto; /* Ensures main content grows to fill available space */
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .article-detail-section,
+      .comments-section {
+        width: 90vw;
+        margin: 0 auto 2rem;
+        box-sizing: border-box;
+      }
+      .back-button {
+        margin-left: 0;
+      }
+      body.article-detail-page {
+        background-size: cover !important; /* Disables zoom on mobile */
+      }
+      .article-detail.card-3d {
+        padding: 1.1rem 0.7rem 0.7rem 0.7rem !important;
+        margin: 0 auto 1.2rem !important;
+        width: 100%;
+        border-radius: 16px !important;
+        font-size: 0.98rem !important;
+      }
+      .article-detail.card-3d h2 {
+        font-size: 1.15rem !important;
+        margin-bottom: 0.7rem !important;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .header-logo-img {
+        height: 96px !important;
+        width: auto !important;
+        margin-right: 0.5rem !important;
+      }
+      .header-logo-text {
+        font-size: 1.6rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px !important;
+      }
+      .header-container {
+        padding-left: 1.5rem !important;
+        padding-right: 2.5rem !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+      }
+      .header-logo-link {
+        margin-right: 1.2rem !important;
+      }
+      .main-nav {
+        flex: 1 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+      }
+      .main-nav ul li a {
+        font-size: 1.05rem !important;
+        padding: 0.35rem 0.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="article-detail-page">
+  <!-- Header & Navigation Baru -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html" class="active">Artikel</a>
+      <a href="profil.html">Terapis</a>
+      <a href="forum.html">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+    </nav>
+  </div>
+
+  <div class="site-header-hero-wrapper">
+  <!-- New Unified Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <a href="index.html" class="header-logo-link">
+        <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+        <span class="header-logo-text">Gerbang Kata</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="artikel.html" class="active">Artikel</a></li>
+          <li><a href="profil.html">Terapis</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="map.html">Peta</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+        <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+      </div>
+      <!-- Hamburger Image Slot -->
+      <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+        <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+        <span class="icon-close" style="display:none">&times;</span>
+      </button>
+    </div>
+  </header>
+  </div>
+  <!-- End Header & Navigation Baru -->
+
+  <!-- Main Content -->
+  <main>
+    <section class="article-detail-section" tabindex="0" aria-label="Detail Artikel">
+      <button onclick="history.back()" class="back-button" aria-label="Kembali ke Artikel">← Kembali</button>
+      <div class="article-detail card-3d" aria-live="polite">
+        <article id="articleContent"></article>
+      </div>
+    </section>
+    
+    <section class="comments-section">
+      <h3>Komentar</h3>
+      <div id="commentList" class="comment-list"></div>
+      <form id="commentForm">
+        <input type="text" id="usernameInput" placeholder="Nama Anda" required />
+        <textarea id="commentInput" placeholder="Tulis komentar Anda di sini..." required></textarea>
+        <button type="submit">Kirim Komentar</button>
+      </form>
+    </section>
+    <link rel="stylesheet" href="comments.css" />
+    <script src="comments.js"></script>
+    
+  </main>
+
+  <footer class="footer-3d" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Tentang Gerbang Kata</h3>
+        <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Kontak</h3>
+        <p><i class="fas fa-envelope"></i> info@gerbangkata.id</p>
+        <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+      </div>
+      <div class="footer-section">
+        <h3>Tautan Cepat</h3>
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="profil.html">Terapis</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="permainan.html">Game</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Gerbang Kata. Semua hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Data artikel lengkap
+    const articles = [
+      {
+        id: "1",
+        title: "5 Cara Meningkatkan Perkembangan Bicara Anak",
+        content: `
+          <p>Perkembangan bicara anak sangat penting untuk komunikasi dan sosialnya. Berikut beberapa cara membantu:</p>
+          <ol>
+            <li>Berbicara dan membacakan buku sejak dini.</li>
+            <li>Mendorong anak untuk meniru suara dan kata.</li>
+            <li>Memberi pujian atas usaha bicara anak.</li>
+            <li>Membatasi penggunaan gadget agar tidak berlebihan.</li>
+            <li>Berkonsultasi dengan terapis wicara jika ada keterlambatan.</li>
+          </ol>
+          <p>Dengan kesabaran dan konsistensi, perkembangan bicara anak dapat meningkat signifikan.</p>
+        `
+      },
+      {
+        id: "2",
+        title: "Tanda-tanda Speech Delay yang Perlu Diwaspadai",
+        content: `
+          <p>Mengenali tanda dini speech delay agar dapat intervensi tepat waktu:</p>
+          <ul>
+            <li>Anak belum mengucapkan kata pertama sampai 18 bulan.</li>
+            <li>Kehilangan kemampuan bicara yang sudah dimiliki.</li>
+            <li>Kesulitan memahami instruksi sederhana.</li>
+            <li>Kurang responsif terhadap suara.</li>
+          </ul>
+          <p>Segera konsultasikan dengan profesional jika tanda-tanda ini muncul.</p>
+        `
+      },
+      {
+        id: "3",
+        title: "Peran Terapis Wicara dalam Mengatasi Speech Delay",
+        content: `
+          <p>Terapis wicara memiliki peran besar dalam membantu anak yang mengalami keterlambatan bicara</p>
+          <p>Berikut perannya:</p>
+          <ul>
+            <li>Menyusun program latihan yang sesuai dengan kebutuhan anak.</li>
+            <li>Melatih anak secara bertahap dengan teknik khusus.</li>
+            <li>Membantu orang tua memahami cara stimulasi di rumah.</li>
+            <li>Memantau dan menilai perkembangan bicara anak.</li>
+            <li>Memberi motivasi dan dukungan emosional bagi keluarga.</li>
+          </ul>
+          <p>Dengan pendampingan profesional, terapi bicara bisa mempercepat kemajuan anak.</p>
+        `
+      },
+      {
+        id: "4",
+        title: "Tips Mendukung Anak dengan Speech Delay di Rumah",
+        content: `
+          <p>Orang tua berperan penting dalam perkembangan bicara anak.</p>
+          <p>Coba lakukan hal ini:</p>
+          <ul>
+            <li>Ajak anak berbicara setiap hari dengan jelas dan perlahan.</li>
+            <li>Bacakan buku cerita dengan ekspresi dan intonasi.</li>
+            <li>Kurangi penggunaan gadget dan tingkatkan interaksi langsung.</li>
+            <li>Sering ajak bermain peran atau bernyanyi bersama.</li>
+            <li>Beri pujian saat anak mencoba berbicara.</li>
+          </ul>
+          <p>Konsistensi adalah kunci dalam mendukung anak dengan speech delay.</p>
+        `
+      },
+      {
+        id: "5",
+        title: "Pengaruh Nutrisi terhadap Perkembangan Bicara Anak",
+        content: `
+          <p>Nutrisi sangat penting bagi perkembangan otak dan bahasa anak.</p>
+          <p>Berikut pengaruh utamanya:</p>
+          <ul>
+            <li>Omega-3 mendukung fungsi otak dan konsentrasi.</li>
+            <li>Zat besi dan zinc penting untuk daya tangkap anak.</li>
+            <li>Protein membantu perkembangan jaringan otak.</li>
+            <li>Vitamin B dan D mendukung fungsi saraf.</li>
+            <li>Asupan gizi seimbang bantu anak lebih aktif secara verbal.</li>
+          </ul>
+          <p>Nutrisi yang baik = perkembangan bicara yang optimal.</p>
+        `
+      },
+      {
+        id: "6",
+        title: "Penyebab Utama Speech Delay pada Anak",
+        content: `
+          <p>Mengetahui penyebab speech delay penting untuk penanganan cepat.</p>
+          <p>Ini beberapa faktor utamanya:</p>
+          <ul>
+            <li>Gangguan pendengaran atau infeksi telinga berulang.</li>
+            <li>Kurangnya stimulasi verbal di lingkungan.</li>
+            <li>Terlalu sering terpapar layar tanpa interaksi.</li>
+            <li>Gangguan perkembangan seperti autisme.</li>
+            <li>Riwayat keterlambatan bicara dalam keluarga.</li>
+          </ul>
+          <p>Deteksi dini bisa membuat perbedaan besar bagi masa depan anak.</p>
+        `
+      },
+      {
+        id: "7",
+        title: "Perbedaan Speech Delay dan Gangguan Autisme",
+        content: `
+          <p>Speech delay dan autisme memiliki ciri yang mirip tapi berbeda.</p>
+          <p>Ini beberapa perbedaannya:</p>
+          <ul>
+            <li>Speech delay: anak cenderung sosial tapi sulit mengucapkan kata.</li>
+            <li>Autisme: anak cenderung menghindari kontak mata dan interaksi sosial.</li>
+            <li>Anak dengan speech delay biasanya tetap tertarik berinteraksi.</li>
+            <li>Anak dengan autisme cenderung menghindari kontak mata.</li>
+            <li>Speech delay hanya pada aspek bicara; autisme meliputi perilaku dan sosial.</li>
+            <li>Autisme bisa disertai gerakan repetitif dan gangguan sensorik.</li>
+            <li>Evaluasi profesional sangat penting untuk diagnosis akurat.</li>
+          </ul>
+          <p>Memahami perbedaan ini bantu orang tua mengambil langkah tepat.</p>
+        `
+      },
+      {
+        id: "8",
+        title: "Bagaimana Cara Kerja Terapi Wicara?",
+        content: `
+          <p>Terapi wicara membantu anak berlatih bicara secara bertahap dan terstruktur.</p>
+          <p>Berikut proses umumnya:</p>
+          <ul>
+            <li>Penilaian awal kemampuan bahasa dan komunikasi anak.</li>
+            <li>Penyusunan program terapi sesuai kebutuhan anak.</li>
+            <li>Latihan pengucapan, kosakata, dan interaksi sosial.</li>
+            <li>Evaluasi rutin untuk memantau perkembangan.</li>
+            <li>Pendampingan dan arahan bagi orang tua di rumah.</li>
+          </ul>
+          <p>Dengan metode yang tepat, terapi dapat mempercepat kemampuan bicara anak.</p>
+        `
+      },
+      {
+        id: "9",
+        title: "Peran Keluarga dalam Mendukung Terapi Anak",
+        content: `
+          <p>Keterlibatan keluarga sangat berpengaruh dalam proses terapi bicara.</p>
+          <p>Berikut perannya:</p>
+          <ul>
+            <li>Menerapkan latihan terapi di rumah secara konsisten.</li>
+            <li>Menjadi pendengar aktif dan memberi respon saat anak berbicara.</li>
+            <li>Memberikan motivasi dan tidak membandingkan anak.</li>
+            <li>Menjaga lingkungan yang tenang dan suportif untuk belajar bicara.</li>
+            <li>Bekerjasama dengan terapis dalam memantau perkembangan anak.</li>
+          </ul>
+          <p>Dengan dukungan keluarga, terapi akan berjalan lebih efektif.</p>
+        `
+      },
+      {
+        id: "10",
+        title: "Tips Memilih Terapis Wicara yang Tepat",
+        content: `
+          <p>Memilih terapis wicara yang tepat sangat penting bagi kemajuan anak.</p>
+          <p>Berikut tipsnya:</p>
+          <ul>
+            <li>Pastikan terapis memiliki lisensi dan latar belakang pendidikan resmi.</li>
+            <li>Cari yang berpengalaman menangani kasus speech delay.</li>
+            <li>Memberikan motivasi dan tidak membandingkan anak.</li>
+            <li>Pilih terapis yang komunikatif dan ramah terhadap anak.</li>
+            <li>Perhatikan metode terapi yang digunakan, apakah cocok dengan anak.</li>
+            <li>Mintalah referensi atau ulasan dari orang tua lain</li>
+          </ul>
+          <p>Terapis yang tepat akan membuat anak lebih nyaman dan semangat menjalani terapi.</p>
+        `
+      },
+      {
+        id: "11",
+        title: "Latihan Bicara yang Bisa Dilakukan di Rumah",
+        content: `
+          <p>Latihan sederhana di rumah bisa bantu anak dengan speech delay berkembang lebih cepat</p>
+          <p>Berikut latihan yang dapat dilakukan:</p>
+          <ul>
+            <li>Ajak anak menirukan suara binatang atau benda sekitar.</li>
+            <li>Gunakan kartu gambar untuk mengenalkan kosakata.</li>
+            <li>Bernyanyi bersama lagu anak-anak yang berima.</li>
+            <li>Bermain peran seperti dokter-dokteran atau jual beli.</li>
+            <li>Bicara perlahan dan jelas sambil menatap wajah anak.</li>
+          </ul>
+          <p>Latihan ini bisa dilakukan rutin untuk hasil yang maksimal.</p>
+        `
+      },
+      {
+        id: "12",
+        title: "Efek Gadget terhadap Kemampuan Bicara Anak",
+        content: `
+          <p>Penggunaan gadget secara berlebihan bisa memperlambat kemampuan bicara anak</p>
+          <p>Berikut efek penggunaan gadget terhadap kemampuan bicara anak:</p>
+          <ul>
+            <li>Mengurangi interaksi verbal langsung dengan orang sekitar.</li>
+            <li>Membuat anak pasif karena hanya menerima informasi.</li>
+            <li>Mengganggu fokus dan perhatian pada komunikasi nyata.</li>
+            <li>Membatasi waktu bermain imajinatif dan sosial.</li>
+            <li>Menghambat stimulasi bicara dari lingkungan.</li>
+          </ul>
+          <p>Batasi waktu layar dan prioritaskan komunikasi dua arah.</p>
+        `
+      },
+      {
+        id: "13",
+        title: "Kapan Harus Membawa Anak ke Dokter?",
+        content: `
+          <p>Kenali tanda-tanda kapan anak perlu konsultasi profesional</p>
+          <p>Berikut tanda-tanda kapan anak perlu konsultasi profesional:</p>
+          <ul>
+            <li>Tidak mengoceh pada usia 12 bulan.</li>
+            <li>Belum mengatakan satu kata pun pada usia 18 bulan.</li>
+            <li>Tidak merespon saat dipanggil namanya.</li>
+            <li>Tidak menunjukkan minat untuk berkomunikasi.</li>
+            <li>Ada riwayat medis atau gangguan pendengaran.</li>
+          </ul>
+          <p>Semakin cepat dideteksi, semakin baik hasil intervensinya.</p>
+        `
+      },
+      {
+        id: "14",
+        title: "Alasan Pentingnya Stimulasi Verbal dalam di Rumah",
+        content: `
+          <p>Stimulasi verbal dari orang tua sangat berperan dalam perkembangan bicara anak</p>
+          <p>Berikut alasannya:</p>
+          <ul>
+            <li>Membantu anak mengenali dan meniru bunyi serta kata.</li>
+            <li>Memperkuat koneksi otak yang terkait dengan bahasa.</li>
+            <li>Meningkatkan kosakata melalui interaksi sehari-hari.</li>
+            <li>Membangun kepercayaan diri anak untuk mencoba berbicara.</li>
+            <li>Menjadikan komunikasi sebagai kebiasaan positif dalam keluarga.</li>
+          </ul>
+          <p>Stimulasi verbal tak perlu rumit—yang penting dilakukan secara rutin, sabar, dan menyenangkan.</p>
+        `
+      },
+      {
+        id: "15",
+        title: "Bagaimana Mendeteksi Speech Delay pada Bayi?",
+        content: `
+          <p>Mendeteksi sejak dini bisa membuat penanganan lebih cepat dan efektif.</p>
+          <p>Berikut tanda-tandanya:</p>
+          <ul>
+            <li>Usia 6 bulan: tidak merespon suara atau tidak mengoceh.</li>
+            <li>Usia 9 bulan: tidak meniru suara atau ekspresi wajah.</li>
+            <li>Usia 12 bulan: belum mengucapkan kata sederhana seperti "mama".</li>
+            <li>Usia 18 bulan: tidak mengenali nama sendiri saat dipanggil.</li>
+            <li>Tidak menunjukkan keinginan berkomunikasi meskipun non-verbal.</li>
+          </ul>
+          <p>Jika tanda-tanda ini muncul, segera konsultasikan ke dokter atau terapis.</p>
+        `
+      },
+      {
+        id: "16",
+        title: "Mitos dan Fakta tentang Speech Delay",
+        content: `
+          <p>Banyak anggapan keliru soal speech delay. Yuk, kenali mitos dan faktanya</p>
+          <p>Berikut mitos dan fakta nya:</p>
+          <ul>
+            <li>❌ Mitos: "Anak laki-laki memang lebih lambat bicara."
+                ✅ Fakta: Setiap anak berbeda, speech delay bisa dialami siapa saja.</li>
+            <li>❌ Mitos: "Nanti juga lancar sendiri, tidak usah dibawa ke terapi."
+                ✅ Fakta: Intervensi dini sangat penting untuk hasil terbaik.</li>
+            <li>❌ Mitos: "Anak diam tandanya pintar dan pendiam saja."
+                ✅ Fakta: Diam bisa jadi tanda speech delay yang perlu diperiksa.</li>    
+          </ul>
+          <p>Memahami fakta bantu orang tua ambil langkah yang tepat.</p>
+        `
+      },
+      {
+        id: "17",
+        title: "Manfaat Terapi Wicara untuk Anak Berkebutuhan Khusus",
+        content: `
+          <p>Bukan hanya untuk speech delay, terapi wicara juga penting bagi anak dengan kebutuhan khusus.</p>
+          <p>Manfaatnya meliputi:</p>
+          <ul>
+            <li>Membantu anak dengan autisme untuk belajar komunikasi sosial.</li>
+            <li>Melatih anak dengan down syndrome dalam kemampuan artikulasi.</li>
+            <li>Mendukung anak dengan cerebral palsy dalam mengatur otot bicara.</li>
+            <li>Meningkatkan keterampilan bahasa dan interaksi sehari-hari.</li>
+            <li>Membantu dalam penggunaan alat bantu komunikasi jika diperlukan.</li>      
+          </ul>
+          <p>Terapi wicara berperan besar dalam kualitas hidup anak-anak berkebutuhan khusus.</p>
+        `
+      },
+      {
+        id: "18",
+        title: "Studi Kasus Speech Delay dan Terapi Sukses",
+        content: `
+          <p>Contoh nyata bisa memberi harapan bagi orang tua yang sedang berjuang.</p>
+          <p>Salah satu studi kasus:</p>
+          <ul>
+            <p>Seorang anak usia 3 tahun belum bisa menyusun dua kata. Setelah evaluasi, anak menjalani terapi wicara seminggu sekali. Orang tua rutin menerapkan latihan bicara di rumah. Dalam 6 bulan, anak mulai menggunakan kalimat sederhana. Perkembangan sosial dan kepercayaan dirinya ikut meningkat.</p>    
+          </ul>
+          <p>Dengan kolaborasi keluarga dan terapis, speech delay bisa diatasi dengan hasil yang membanggakan.</p>
+        `
+      },
+      {
+        id: "19",
+        title: "Pengaruh Lingkungan pada Perkembangan Bicara Anak",
+        content: `
+          <p>Bagaimana lingkungan sekitar dan interaksi sosial mempengaruhi kemampuan bicara anak?</p>
+          <p>Berikut dampaknya lingkungan pada perkembangan bicara pada anak:</p>
+          <ul>
+            <li>Lingkungan yang aktif bicara memperkaya kosakata anak.</li>
+            <li>Interaksi sosial dengan teman sebaya mendorong komunikasi dua arah.</li>
+            <li>Lingkungan rumah yang tenang dan suportif bantu anak belajar fokus.</li>
+            <li>Kurangnya interaksi atau keheningan berlebihan bisa memperlambat bicara.</li>
+            <li>Kehadiran orang tua yang responsif mempercepat proses belajar bicara.</li>
+          </ul>
+          <p>Ciptakan lingkungan yang merangsang anak untuk berbicara setiap hari.</p>
+        `
+      },
+      {
+        id: "20",
+        title: "Peran Teknologi dalam Terapi Wicara Modern",
+        content: `
+          <p>Teknologi kini membantu memperkuat proses terapi bicara anak.</p>
+          <p>Contohnya:</p>
+          <ul>
+            <li>Aplikasi edukatif untuk latihan bicara di rumah.</li>
+            <li>Video interaktif yang merangsang kosakata anak.</li>
+            <li>Alat bantu komunikasi digital untuk anak non-verbal.</li>
+            <li>Platform konsultasi daring bagi keluarga di daerah terpencil.</li>
+            <li>Pemantauan progres anak lewat aplikasi berbasis terapi.</li>
+          </ul>
+          <p>Dengan penggunaan tepat, teknologi jadi pendukung terapi yang efektif.</p>
+        `
+      },
+      {
+        id: "21",
+        title: "Perjalanan Emosional Orang Tua dalam Menghadapi Speech Delay",
+        content: `
+          <p>Menghadapi anak dengan speech delay tidak mudah bagi orang tua.</p>
+          <p>Berikut cara mengelola emosinya:</p>
+          <ul>
+            <li>Terima kondisi anak dengan hati terbuka.</li>
+            <li>Hindari menyalahkan diri sendiri atau pasangan.</li>
+            <li>Bangun komunitas atau cari dukungan sesama orang tua.</li>
+            <li>Fokus pada progres kecil yang dicapai anak.</li>
+            <li>Percaya bahwa setiap anak punya waktu tumbuhnya sendiri.</li>
+          </ul>
+          <p>Dengan dukungan emosional, orang tua akan lebih kuat menemani proses tumbuh anak.</p>
+        `
+      },
+      // Tambah artikel lainnya sesuai id dan isi lengkap
+    ];
+
+    // Fungsi ambil parameter id dari URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Render artikel sesuai id
+    function renderArticle(id) {
+      const article = articles.find(a => a.id === id);
+      const container = document.getElementById('articleContent');
+      if (!article) {
+        container.innerHTML = '<p>Artikel tidak ditemukan.</p>';
+        return;
+      }
+      container.innerHTML = `
+        <h2>${article.title}</h2>
+        ${article.content}
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const id = getQueryParam('id');
+      renderArticle(id);
+      
+      const commentListEl = document.getElementById("commentList");
+      const articleId = new URLSearchParams(window.location.search).get("id") || "default";
+
+      function loadComments() {
+        const comments = JSON.parse(localStorage.getItem(`comments_${articleId}`)) || [];
+        commentListEl.innerHTML = comments.map((c, i) => `
+          <div class="comment-card">
+            <div class="comment-card-header">
+              <strong>${c.user}</strong> <small>${c.time}</small>
+              <button class="delete-comment" data-index="${i}" style="float:right;background:#ff6b6b;color:#fff;border:none;border-radius:8px;padding:0.2rem 1rem;font-weight:700;cursor:pointer;margin-left:auto;">Hapus</button>
+            </div>
+            <p>${c.text}</p>
+          </div>
+        `).join("");
+        // Tambahkan event listener untuk hapus
+        document.querySelectorAll('.delete-comment').forEach(btn => {
+          btn.onclick = function() {
+            const idx = this.getAttribute('data-index');
+            const comments = JSON.parse(localStorage.getItem(`comments_${articleId}`)) || [];
+            comments.splice(idx, 1);
+            localStorage.setItem(`comments_${articleId}` , JSON.stringify(comments));
+            loadComments();
+          };
+        });
+      }
+
+      document.getElementById("commentForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const user = document.getElementById("usernameInput").value.trim();
+        const text = document.getElementById("commentInput").value.trim();
+        if (text && user) {
+          const comments = JSON.parse(localStorage.getItem(`comments_${articleId}`)) || [];
+          comments.push({
+            text,
+            user,
+            time: new Date().toLocaleString()
+          });
+          localStorage.setItem(`comments_${articleId}`, JSON.stringify(comments));
+          document.getElementById("commentForm").reset();
+          loadComments();
+        } else {
+            alert("Nama dan komentar tidak boleh kosong.");
+        }
+      });
+
+      loadComments();
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+
+  <script>
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mainHeader = document.querySelector('.main-header');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+      mobileNavOverlay.classList.toggle('is-open');
+      if (mobileNavOverlay.classList.contains('is-open')) {
+        document.body.classList.add('menu-open');
+        iconHamburger.style.display = 'none';
+        iconClose.style.display = 'inline';
+      } else {
+        document.body.classList.remove('menu-open');
+        iconHamburger.style.display = 'inline';
+        iconClose.style.display = 'none';
+      }
+    });
+
+    mobileNavOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileNavOverlay) {
+        mobileNavOverlay.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        iconHamburger.style.display = 'inline';
+        iconClose.style.display = 'none';
+      }
+    });
+  </script>
+  
+</body>
+</html>

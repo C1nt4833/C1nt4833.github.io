@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Terapis - Gerbang Kata</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="icon" href="src/gerbangkata.png" type="image/png" />
+  <style>
+    body.profile-detail-page {
+      background: url('src/memahami speech delay pada anak.webp') no-repeat center top !important;
+      background-size: 150% auto !important;
+    }
+    /* Minimal styling khusus detail terapis */
+    .therapist-detail-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .therapist-photo-large img {
+      width: 280px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .therapist-info-detail {
+      flex: 1;
+      color: #004466;
+    }
+    .therapist-info-detail h2 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .therapist-info-detail .rating i {
+      color: #ffbb33;
+    }
+    .back-button {
+      margin-left: 40px;
+      padding: 10px 16px;
+      background: #3556a9;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 12px #b5c6e0;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .back-button:hover {
+      background: #223a6d;
+    }
+
+    main {
+      padding-top: 80px; /* Pushes content down from sticky header */
+    }
+
+    @media (max-width: 600px) {
+      .therapist-detail-section {
+        padding: 0 4vw;
+        box-sizing: border-box;
+      }
+      .back-button {
+        margin-left: 0;
+      }
+      body.profile-detail-page {
+        background-size: cover !important; /* Disables zoom on mobile */
+      }
+      .therapist-detail-card {
+        margin: 20px auto;
+        padding: 15px;
+        flex-direction: column;
+        align-items: center;
+      }
+      .therapist-photo-large img {
+        width: 150px;
+      }
+      .therapist-info-detail h2 {
+        font-size: 1.6rem;
+      }
+      .therapist-info-detail ul {
+        padding-left: 0;
+        list-style-position: inside;
+      }
+    }
+  </style>
+</head>
+<body class="profile-detail-page">
+  <!-- Header & Navigation Baru -->
+  <div class="mobile-nav-overlay">
+    <nav class="mobile-nav">
+      <a href="index.html">Beranda</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="profil.html" class="active">Terapis</a>
+      <a href="forum.html">Forum</a>
+      <a href="map.html">Peta</a>
+      <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+    </nav>
+  </div>
+
+  <div class="site-header-hero-wrapper">
+    <header class="main-header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo-link">
+          <img src="src/gb2.png" alt="Gerbang Kata Logo" class="header-logo-img" />
+          <span class="header-logo-text">Gerbang Kata</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+              <li><a href="index.html">Beranda</a></li>
+              <li><a href="artikel.html">Artikel</a></li>
+              <li><a href="profil.html">Terapis</a></li>
+              <li><a href="forum.html">Forum</a></li>
+              <li><a href="map.html">Peta</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="permainan.html" class="cta-button-nav">Mainkan!</a>
+          <button id="logoutBtn" class="cta-button-nav" style="margin-left:10px;">Logout</button>
+        </div>
+        <button id="hamburger-toggle" class="hamburger-btn" aria-label="Menu">
+          <img src="src/garistiga.jpg" alt="Menu" class="icon-hamburger" style="width:24px;height:24px;">
+          <span class="icon-close" style="display:none">&times;</span>
+        </button>
+      </div>
+    </header>
+  </div>
+  <!-- End Header & Navigation Baru -->
+
+  <!-- Main Content -->
+  <main>
+    <section class="therapist-detail-section" tabindex="0" aria-label="Detail Profil Terapis">
+      <button onclick="history.back()" class="back-button" aria-label="Kembali ke Profil Terapis">← Kembali</button>
+      <div id="therapistDetail" class="therapist-detail-card card-3d" aria-live="polite">
+        <!-- Data profil akan dimasukkan di sini oleh JS -->
+        <p>Memuat data terapis...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-3d" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Tentang Gerbang Kata</h3>
+        <p>Platform informasi untuk membantu orang tua memahami dan menangani speech delay pada anak.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Kontak</h3>
+        <p><i class="fas fa-envelope"></i> infogerbangkata@gmail.com</p>
+        <p><i class="fas fa-phone"></i> 085215224661 </br>(Cinta Wardana)</p>
+        <p><i class="fas fa-phone"></i> 087766760195 </br>(Rezky Alya Pasrun)</p>
+        <p><i class="fas fa-phone"></i> 082328238104 </br>(Miqdad Asyraf Rizqullah)</p>
+      </div>
+      <div class="footer-section">
+        <h3>Tautan Cepat</h3>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="profil.html">Profil Terapis</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Gerbang Kata. Semua hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Data terapis - sesuaikan data lengkapnya
+    const therapists = [
+      {
+        id: "1",
+        name: "Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog",
+        photo: "src/dr.andi.png",
+        specialization: "Psikologi Klinis",
+        location: "Kendari",
+        experience: "12 tahun pengalaman",
+        rating: 4.7,
+        reviews: 45,
+        bio: `Dr. ANDI RIZKY AMELIA, M.Psi., Psikolog adalah psikolog anak berpengalaman yang fokus pada terapi perkembangan dan membantu anak-anak dengan speech delay. Memiliki pendekatan personal dan program terapi yang disesuaikan dengan kebutuhan setiap anak.`,
+        skills: [
+          "Evaluasi dan diagnosis speech delay",
+          "Terapi perkembangan bahasa dan komunikasi",
+          "Konsultasi untuk orang tua dan keluarga",
+        ],
+        schedule: "Senin - sabtu : 09.00 - 16.00 WIB",
+        contact: {
+          email: "ms.rizkyamelia@gmail.com",
+          phone: "0853-9442-4185",
+          instagram: "@andirizly.amelia",
+        }
+      },
+      // Tambahkan data terapis lain sesuai format di atas
+      {
+        id: "2",
+        name: "Sri Nurul Ain S.Pd",
+        photo: "src/karakter1.png",
+        specialization: "Terapis Wicara Anak",
+        location: "Kendari",
+        experience: "9 tahun pengalaman",
+        rating: 4.1,
+        reviews: 20,
+        bio: `Sri Nurul Ain S.Pd adalah terapis wicara yang ahli dalam membantu anak mengatasi speech delay dengan metode terapi yang inovatif dan menyenangkan.`,
+        skills: [
+          "Terapi bicara individual",
+          "Latihan suara dan artikulasi",
+          "Konsultasi dan pelatihan orang tua"
+        ],
+        schedule: "Senin - sabtu: 8.00 - 14.00 WIB",
+        contact: {
+          email: "-",
+          phone: "-",
+        }
+      },
+      {
+        id: "3",
+        name: "Karmila  Amd.stat",
+        photo: "src/karakter1.png",
+        specialization: "Terapis Wicara Anak",
+        location: "Kendari",
+        experience: "7 tahun pengalaman",
+        rating: 4.1,
+        reviews: 60,
+        bio: `Karmila  Amd.stat adalah terapis wicara yang ahli dalam membantu anak mengatasi speech delay dengan metode terapi yang inovatif dan menyenangkan.`,
+        skills: [
+          "Terapi bicara individual",
+          "Latihan suara dan artikulasi",
+          "Konsultasi dan pelatihan orang tua"
+        ],
+        schedule: "Senin - sabtu: 8.00 - 14.00 WIB",
+        contact: {
+          email: "-",
+          phone: "-",
+        }
+      },
+      {
+        id: "4",
+        name: "Inayahtullah Afandi S.SI .gr",
+        photo: "src/karakter1.png",
+        specialization: "Terapis Wicara Anak",
+        location: "Kendari",
+        experience: "15 tahun pengalaman",
+        rating: 4.6,
+        reviews: 50,
+        bio: `Inayahtullah Afandi S.SI .gr adalah terapis wicara yang ahli dalam membantu anak mengatasi speech delay dengan metode terapi yang inovatif dan menyenangkan.`,
+        skills: [
+          "Terapi bicara individual",
+          "Latihan suara dan artikulasi",
+          "Konsultasi dan pelatihan orang tua"
+        ],
+        schedule: "Senin - sabtu: 8.00 - 14.00 WIB",
+        contact: {
+          email: "-",
+          phone: "-",
+        }
+      },
+      {
+        id: "5",
+        name: "Wa ode nur amalia S.Pt.",
+        photo: "src/karakter1.png",
+        specialization: "Terapis Wicara Anak",
+        location: "Kendari",
+        experience: "8 tahun pengalaman",
+        rating: 3.9,
+        reviews: 22,
+        bio: `Wa ode nur amalia S.Pt. adalah terapis wicara yang ahli dalam membantu anak mengatasi speech delay dengan metode terapi yang inovatif dan menyenangkan.`,
+        skills: [
+          "Terapi bicara individual",
+          "Latihan suara dan artikulasi",
+          "Konsultasi dan pelatihan orang tua"
+        ],
+        schedule: "Senin - sabtu: 8.00 - 14.00 WIB",
+        contact: {
+          email: "-",
+          phone: "-",
+        }
+      }
+    ];
+
+    // Fungsi ambil parameter id dari URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Render data terapis ke HTML
+    function renderTherapistDetail(therapist) {
+      if (!therapist) {
+        return `<p>Profil terapis tidak ditemukan.</p>`;
+      }
+      return `
+        <div class="therapist-photo-large">
+          <img src="${therapist.photo}" alt="Foto ${therapist.name}" />
+        </div>
+        <div class="therapist-info-detail">
+          <h2>${therapist.name}</h2>
+          <p class="specialization">${therapist.specialization}</p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> ${therapist.location}</p>
+          <p class="experience"><i class="fas fa-certificate"></i> ${therapist.experience}</p>
+          <div class="rating" aria-label="Rating: ${therapist.rating} dari 5 berdasarkan ${therapist.reviews} ulasan">
+            ${renderStars(therapist.rating)}
+            <span>${therapist.rating} (${therapist.reviews} ulasan)</span>
+          </div>
+          <hr />
+          <h3>Profil Singkat</h3>
+          <p>${therapist.bio}</p>
+          <h3>Keahlian</h3>
+          <ul>${therapist.skills.map(skill => `<li>${skill}</li>`).join('')}</ul>
+          <h3>Jadwal Praktek</h3>
+          <p>${therapist.schedule.replace(/\n/g, '<br>')}</p>
+          <h3>Kontak</h3>
+          <p>Email: <a href="mailto:${therapist.contact.email}">${therapist.contact.email}</a></p>
+          <p>Telepon: <a href="tel:${therapist.contact.phone}">${therapist.contact.phone}</a></p>
+        </div>
+      `;
+    }
+
+    // Fungsi render bintang rating
+    function renderStars(rating) {
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+      const emptyStars = 5 - fullStars - halfStar;
+      let starsHtml = '';
+      for (let i = 0; i < fullStars; i++) {
+        starsHtml += '<i class="fas fa-star"></i>';
+      }
+      if (halfStar) {
+        starsHtml += '<i class="fas fa-star-half-alt"></i>';
+      }
+      for (let i = 0; i < emptyStars; i++) {
+        starsHtml += '<i class="far fa-star"></i>';
+      }
+      return starsHtml;
+    }
+
+    // Eksekusi saat halaman siap
+    document.addEventListener('DOMContentLoaded', () => {
+      const id = getQueryParam('id');
+      const therapist = therapists.find(t => t.id === id);
+      const container = document.getElementById('therapistDetail');
+      container.innerHTML = renderTherapistDetail(therapist);
+    });
+
+    // ====== LOGOUT SCRIPT ======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login2.html';
+      });
+    }
+    // ====== END LOGOUT SCRIPT ======
+  </script>
+  
+  <script>
+    const hamburgerToggle = document.querySelector('#hamburger-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const iconHamburger = document.querySelector('.icon-hamburger');
+    const iconClose = document.querySelector('.icon-close');
+
+    hamburgerToggle.addEventListener('click', () => {
+        mobileNavOverlay.classList.toggle('is-open');
+        if (mobileNavOverlay.classList.contains('is-open')) {
+            document.body.classList.add('menu-open');
+            iconHamburger.style.display = 'none';
+            iconClose.style.display = 'inline';
+        } else {
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+
+    // Juga tutup menu jika klik di overlay luar menu
+    mobileNavOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileNavOverlay) {
+            mobileNavOverlay.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+            iconHamburger.style.display = 'inline';
+            iconClose.style.display = 'none';
+        }
+    });
+  </script>
+</body>
+</html>
